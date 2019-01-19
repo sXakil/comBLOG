@@ -1,0 +1,53 @@
+include partials/header
+doctype html
+html
+    head
+        +head
+    body
+        +menu
+        .container
+            .row
+                .col-md-12
+                    .thumbnail
+                        img.img-responsive(src=campground.image width="400px")
+                        .caption-full
+                            .pull-right 
+                                h4 $9.00/night
+                                if(currentUser && campground.author.id.equals(currentUser._id))
+                                    a(href=campground._id + "/edit")
+                                        button.btn.btn-xs.btn-success(style="margin-right: 10px") Edit
+                                    form.pull-right(action="/campgrounds/" + campground._id + "?_method=DELETE" method="POST")
+                                        button.btn.btn-xs.btn-danger Delete
+                            h5
+                                p(style="color: grey; font-size: 16px")= "Posted by " + campground.author.username
+                            h3
+                                a= campground.name
+                            p= campground.description
+                            //.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+                    .well
+                        if(currentUser)
+                            form(action="/campgrounds/" + campground._id + "/comment" method="POST")
+                                .form-group
+                                    textarea.form-control(style="width: 100%" name="comment[text]" rows="5" placeholder="Write a comment")
+                                .form-group 
+                                    input.form-control(style="width: 50%" type="text" name="comment[author]" value=currentUser.firstName readonly)
+                                .form-group
+                                    button.btn.btn-primary Post
+                        else
+                            p(style="text-align: center") Login to comment
+                    if(campground.comments.length)
+                        h2.page-header Comments
+                        section.comment-list
+
+                        for comment in campground.comments
+                            article.row
+                                .col-md-2.col-sm-2.hidden-xs
+                                    .thumbnail
+                                        img.img-responsive(src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png")
+                                        figcaption.text-center(id=campground.comments.length)= comment.author.username
+                                .col-md-10.col-sm-10
+                                    .panel.panel-default.arrow.left
+                                        .panel-body
+                                            .comment-post
+                                                p= comment.text
+                            hr

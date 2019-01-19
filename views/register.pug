@@ -1,0 +1,23 @@
+include partials/header
+doctype html
+html
+    head
+        +head
+    body
+        +menu
+        .container
+            .row
+                h1(style="text-align: center") Sign Up to YelpCamp
+                div(style="width: 40%; margin: 25px auto;")
+                    form(action="/register" method="POST")
+                        .form-group
+                            input.form-control(type="text" name="username" placeholder="Username")
+                        .form-group
+                            input.form-control(type="text" name="firstName" placeholder="First Name")
+                        .form-group
+                            input.form-control(type="text" name="surName" placeholder="Surname")
+                        .form-group
+                            input.form-control(type="password" name="password" placeholder="Password")
+                        .form-group
+                            button.btn.btn-lg.btn-primary.btn-block Sign Up
+                    a(href="/campgrounds") Go Back

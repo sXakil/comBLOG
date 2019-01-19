@@ -1,0 +1,24 @@
+include partials/header
+doctype html
+html
+    head
+        +head
+    body
+        +menu
+        .container
+            header.jumbotron
+                .container
+                    h1 Welcome To YelpCamp!!
+                    p View our hand-picked campgrounds from all over the world
+                    a.btn.btn-primary.btn-large(href="/campgrounds/new") Add New Campground
+
+            row.text-center(style="display:flex; flex-wrap: wrap;")
+                for campground in campgrounds
+                    .col-md-3.col-sm-6
+                        .thumbnail
+                            img(src=campground.image)
+                            br
+                            a= campground.author.username
+                        .caption
+                            h4=campground.name
+                        a(href="/campgrounds/" + campground._id).btn.btn-primary More Info

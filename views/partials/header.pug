@@ -1,0 +1,30 @@
+mixin head
+    title= "YelpCamp"
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    script(src="//code.jquery.com/jquery-1.11.1.min.js")
+    script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+    link(rel="stylesheet" href="/stylesheets/app.css")
+
+mixin menu
+    nav.navbar.navbar-default.navbar-static-top(role="navigation")
+        .container
+            .navbar-header
+                .navbar-header
+                    a.navbar-brand.pull-left(href="/" style="font-weight: bold") YelpCamp
+                button(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1").navbar-toggle.collapsed
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+            .collapse.navbar-collapse#bs-example-navbar-collapse-1
+                ul.nav.navbar-nav.navbar-right
+                    if(!currentUser)
+                        li
+                            a(href="/login") Login
+                        li
+                            a(href="/register") Sign Up
+                    else
+                        li
+                            a= "Hello, " + currentUser.firstName
+                        li
+                            a(href="/logout") Logout
