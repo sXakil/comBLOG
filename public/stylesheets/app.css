@@ -1,0 +1,95 @@
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+.comment-list .row {
+    margin-bottom: 0px;
+}
+.comment-list .panel .panel-heading {
+    padding: 4px 15px;
+    position: absolute;
+    border:none;
+    border-top-right-radius:0px;
+    top: 1px;
+}
+.comment-list .panel .panel-heading.right {
+    border-right-width: 0px;
+    border-top-left-radius:0px;
+    right: 16px;
+}
+.comment-list .panel .panel-heading .panel-body {
+    padding-top: 6px;
+}
+.comment-list figcaption {
+    word-wrap: break-word;
+}
+@media (min-width: 768px) {
+    .comment-list .arrow:after, .comment-list .arrow:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: solid transparent;
+    }
+    .comment-list .panel.arrow.left:after, .comment-list .panel.arrow.left:before {
+        border-left: 0;
+    }
+    .comment-list .panel.arrow.left:before {
+        left: 0px;
+        top: 30px;
+        border-right-color: inherit;
+        border-width: 16px;
+    }
+    .comment-list .panel.arrow.left:after {
+        left: 1px;
+        top: 31px;
+        border-right-color: #FFFFFF;
+        border-width: 15px;
+    }
+    .comment-list .panel.arrow.right:before {
+        right: -16px;
+        top: 30px;
+        border-left-color: inherit;
+        border-width: 16px;
+    }
+    .comment-list .panel.arrow.right:after {
+        right: -14px;
+        top: 31px;
+        border-left-color: #FFFFFF;
+        border-width: 15px;
+    }
+}
+.comment-list .comment-post {
+    margin-top: 6px;
+}
+.thumbnail {
+    padding: 0 0 10px;
+}
+.thumbnail img {
+    width: 100%;
+}
+.caption-full {
+    padding: 6px;
+}
+.error {
+    width: 200px;
+    height: 20px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    bottom: 10px;
+    background-color: rgba(38, 38, 38, 0.8);
+    color: #F0F0F0;
+    font-family: Calibri, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 30px -1px rgba(46, 46, 46, 1);
+    -moz-box-shadow: 0px 0px 30px -1px rgba(46, 46, 56, 1);
+    box-shadow: 0px 0px 30px -1px rgba(46, 46, 46, 1);
+}
+@media (max-width:768px) {
+    .navbar-brand {
+        width:100px;
+        max-height:50px;
+    }
+}
