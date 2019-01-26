@@ -1,11 +1,11 @@
-let express = require("express");
+let express  = require("express");
 let router   = express.Router();
-const Campground    = require("../models/campground");
+let db       = require("../models");
 
 router.get('/', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    Campground.find({}, (err, allCampgrounds) => {
+    db.Campground.find({}, (err, allCampgrounds) => {
         if(err) res.send(err)
         else res.json(allCampgrounds);
     })
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
+    db.Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
         if(err) res.send(err)
         else res.json(foundCampground);
     })

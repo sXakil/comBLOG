@@ -1,10 +1,9 @@
 let express = require("express");
 let router   = express.Router();
-const Campground    = require("../models/campground"),
-    Comment          = require("../models/comment");
+let db       = require("../models");
 
 router.get("/", (req, res) => {
-    Campground.find({}, (err, allCampgrounds) => {
+    db.Campground.find({}, (err, allCampgrounds) => {
         if(err){
             res.send(err);
         } else {
@@ -23,7 +22,7 @@ router.post("/", isLoggedIn, (req, res) => {
             username: req.user.username
         }
     };
-    Campground.create(newCampground, (err) => {
+    db.Campground.create(newCampground, (err) => {
         if(err){
             res.send(err);
         } else {
@@ -37,7 +36,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
+    db.Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
         if(err){
             res.send(err);
         } else {
@@ -47,13 +46,13 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/:id/edit", isAuthorized, (req, res) => {
-    Campground.findById(req.params.id, (err, foundCampground) => {
+    db.Campground.findById(req.params.id, (err, foundCampground) => {
         res.render("edit", {campground: foundCampground});
     })
 });
 
 router.put("/:id", isAuthorized, (req, res) => {
-    Campground.findByIdAndUpdate(req.params.id, req.body.camp, (err, updatedCampground) => {
+    db.Campground.findByIdAndUpdate(req.params.id, req.body.camp, (err, updatedCampground) => {
         if(err) {
             res.send(err);
         } else {
@@ -63,7 +62,7 @@ router.put("/:id", isAuthorized, (req, res) => {
 })
 
 router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
-    Campground.findByIdAndRemove(req.params.id, (err) => {
+    db.Campground.findByIdAndRemove(req.params.id, (err) => {
         if(err) {
             res.send(err);
         } else {
@@ -73,11 +72,11 @@ router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
 })
 
 router.post("/:id/comment", isLoggedIn, (req, res) => {
-    Campground.findById(req.params.id, (err, campground) => {
+    db.Campground.findById(req.params.id, (err, campground) => {
         if(err) {
             res.send(err);
         } else {
-            Comment.create(req.body.comment, (err, comment) => {
+            db.Comment.create(req.body.comment, (err, comment) => {
                 if(err) {
                     console.log(err)
                 } else {
@@ -102,7 +101,7 @@ function isLoggedIn(req, res, next) {
 
 function isAuthorized(req, res, next) {
     if(req.isAuthenticated()) {
-        Campground.findById(req.params.id, (err, foundCampground) => {
+        db.Campground.findById(req.params.id, (err, foundCampground) => {
             if(err) {
                 console.log(err);
             } else {
