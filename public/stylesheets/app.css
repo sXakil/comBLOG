@@ -87,6 +87,23 @@
     -moz-box-shadow: 0px 0px 30px -1px rgba(46, 46, 56, 1);
     box-shadow: 0px 0px 30px -1px rgba(46, 46, 46, 1);
 }
+
+#new {
+    padding: 5px;
+    animation: fadeout 8s;
+}
+@keyframes fadeout {
+    0% {
+        background: floralwhite;
+    }
+    70% {
+        background: floralwhite;
+    }
+    100% {
+        background: none;
+    }
+}
+
 @media (max-width:768px) {
     .navbar-brand {
         width:100px;
