@@ -10,8 +10,9 @@ const express        = require("express"),
     User             = require("./models/user"),
     seedDB           = require("./seeds");
 /* routes */
-let campgroundRoutes = require("./routes/campgrounds"),
-    authRoutes       = require("./routes/auth");
+let campgroundRoute = require("./routes/campgrounds"),
+    authRoute       = require("./routes/auth"),
+    apiRoute        = require("./routes/api");
 
 mongoose.connect("mongodb://localhost/yelp_camp", {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({extended: true}));
@@ -37,9 +38,9 @@ app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 });
-
-app.use(authRoutes);
-app.use(campgroundRoutes);
+app.use(authRoute);
+app.use('/campgrounds', campgroundRoute);
+app.use('/api', apiRoute);
 
 app.listen(3000, "localhost", function(){
     console.log("Server Has Started!");
