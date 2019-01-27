@@ -21,6 +21,21 @@ h1, h1 span {
     margin-bottom: 25px;
     background-image: linear-gradient(rgb(220, 220, 220), rgb(245, 245, 245));
 }
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    padding-top: 15px;
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+.col-centered * {
+    text-align: left;
+}
 
 .blog-body {
     color: #333;

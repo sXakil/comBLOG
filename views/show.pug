@@ -7,8 +7,8 @@ html
     body
         +menu
         .container
-            .row
-                .col-md-12
+            .row.row-centered
+                .col-md-10.col-centered
                     .thumbnail
                         img.img-responsive(src=campground.image width="400px")
                         .caption-full
@@ -16,11 +16,6 @@ html
                                 -var arr = campground.created.toISOString().split("-");
                                 -var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
                                 h5= months[parseInt(arr[1],10)] + " " + parseInt(arr[1]) + ", " + arr[0]
-                                if(currentUser && campground.author.id.equals(currentUser._id))
-                                    a(href=campground._id + "/edit")
-                                        button.btn.btn-xs.btn-success(style="margin-right: 10px") Edit
-                                    form.pull-right(action="/campgrounds/" + campground._id + "?_method=DELETE" method="POST")
-                                        button.btn.btn-xs.btn-danger Delete
                             h5
                                 if(currentUser && campground.author.id.equals(currentUser._id))
                                     p(style="color: grey; font-size: 16px")= "Posted by You"
@@ -28,6 +23,12 @@ html
                                     p(style="color: grey; font-size: 16px")= "Posted by " + campground.author.username
                     .blog-heading
                         p(style="color: darkslateblue; padding: 20")= campground.name
+                    div(style="text-align: left; padding-bottom: 10px;")
+                        if(currentUser && campground.author.id.equals(currentUser._id))
+                            a(href=campground._id + "/edit")
+                                button.btn.btn-xs.btn-success Edit
+                            form(action="/campgrounds/" + campground._id + "?_method=DELETE" method="POST" style="display: inline;")
+                            button.btn.btn-xs.btn-danger Delete
                     -var body = campground.description.replace(/(?:\r\n|\r|\n)/g, '<br/>')
                     p.blog-body !{body}
                     .well

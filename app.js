@@ -21,7 +21,7 @@ app.use(methodOverride("_method"));
 
 /* passport */
 app.use(require("express-session")({
-    secret: "ghent43765easter5684v509bnf5460q3brynn",
+    secret: "DC64B7D980E7EFFEE4070C282A9AC863F7A83E9EB890E16606ADC5C25A457CD2",
     resave: false,
     saveUninitialized: false
 }));
