@@ -18,17 +18,23 @@ html
                                 h5= months[parseInt(arr[1],10)] + " " + parseInt(arr[1]) + ", " + arr[0]
                             h5
                                 if(currentUser && blog.author.id.equals(currentUser._id))
-                                    p(style="color: grey; font-size: 16px")= "Posted by You"
+                                    p(style="color: grey; font-size: 16px") Posted by 
+                                        a you
                                 else 
-                                    p(style="color: grey; font-size: 16px")= "Posted by " + blog.author.username
+                                    p(style="color: grey; font-size: 16px") Posted by  
+                                        a= blog.author.username
                     .blog-heading
                         p(style="color: lightslategrey; padding: 20")= blog.title
                     div(style="text-align: left; padding-bottom: 10px;")
                         if(currentUser && blog.author.id.equals(currentUser._id))
                             a(href=blog._id + "/edit")
-                                button.btn.btn-xs.btn-success Edit
-                            form(action="/blogs/" + blog._id + "?_method=DELETE" method="POST" style="display: inline;")
-                                button.btn.btn-xs.btn-danger Delete
+                                button.btn.btn-xs.btn-success 
+                                    i.fas.fa-edit
+                                    |  Edit
+                            form(action="/blogs/" + blog._id + "?_method=DELETE" method="POST" style="display: inline")
+                                button.btn.btn-xs.btn-danger 
+                                    i.fas.fa-trash-alt
+                                    |  Delete
                     -var body = blog.blog.replace(/(?:\r\n|\r|\n)/g, '<br/>')
                     p.blog-body !{body}
                     .well
