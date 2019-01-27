@@ -7,17 +7,21 @@ html
         +menu
         .container
             .row
-                h1(style="text-align: center") Sign Up to YelpCamp
-                div(style="width: 40%; margin: 25px auto;")
-                    form(action="/register" method="POST")
-                        .form-group
-                            input.form-control(type="text" name="username" placeholder="Username")
-                        .form-group
-                            input.form-control(type="text" name="firstName" placeholder="First Name")
-                        .form-group
-                            input.form-control(type="text" name="surName" placeholder="Surname")
-                        .form-group
-                            input.form-control(type="password" name="password" placeholder="Password")
-                        .form-group
-                            button.btn.btn-lg.btn-primary.btn-block Sign Up
-                    a(href="/campgrounds") Go Back
+                .jumbotron
+                    h1(style="text-align: center") Sign Up to blog
+                        span(style="font-weight: 900") COM
+                    div(style="width: 40%; margin: 30px auto;")
+                        form(action="/register" method="POST" style="text-align: center")
+                            .form-group
+                                input.form-control(type="text" name="username" placeholder="Username")
+                            .form-group
+                                input.form-control.input-lg(type="text" name="firstName" placeholder="First Name")
+                            .form-group
+                                input.form-control.input-lg(type="text" name="surName" placeholder="Surname")
+                            .form-group
+                                input.form-control(type="password" name="password" placeholder="Password")
+                            .form-group
+                                button.btn.btn-lg.btn-primary Sign Up
+                        a(href="/campgrounds")
+                            i.fas.fa-arrow-left
+                            |  Go Back

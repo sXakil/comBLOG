@@ -1,4 +1,17 @@
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+@import url(//fonts.googleapis.com/css?family=Open+Sans|Sarabun|PT+Sans);
+
+body {
+    font-family: 'PT Sans', sans-serif;
+    color: #777;
+}
+h1, h1 span {
+    font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #777;
+}
+.jumbotron, .container {
+    color: #777;
+}
 .comment-list .row {
     margin-bottom: 0px;
 }
