@@ -26,10 +26,10 @@ html
                                     p(style="color: grey; font-size: 16px")= "Posted by You"
                                 else 
                                     p(style="color: grey; font-size: 16px")= "Posted by " + campground.author.username
-                            h3
-                                a= campground.name
-                            p= campground.description
-                            //.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+                    .blog-heading
+                        p(style="color: darkslateblue; padding: 20")= campground.name
+                    -var body = campground.description.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+                    p.blog-body !{body}
                     .well
                         if(currentUser)
                             .form-group

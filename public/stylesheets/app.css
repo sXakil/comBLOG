@@ -12,6 +12,20 @@ h1, h1 span {
 .jumbotron, .container {
     color: #777;
 }
+
+.row .blog-heading {
+    line-height: 2em;
+    font-size: 1.5em;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 25px;
+    background-image: linear-gradient(rgb(220, 220, 220), rgb(245, 245, 245));
+}
+
+.blog-body {
+    color: #333;
+    font-size: 18px;
+}
 .comment-list .row {
     margin-bottom: 0px;
 }
@@ -69,15 +83,11 @@ h1, h1 span {
         border-width: 15px;
     }
 }
+
 .comment-list .comment-post {
     margin-top: 6px;
 }
-.thumbnail {
-    padding: 0 0 10px;
-}
-.thumbnail img {
-    width: 100%;
-}
+
 .caption-full {
     padding: 6px;
 }
@@ -100,7 +110,12 @@ h1, h1 span {
     -moz-box-shadow: 0px 0px 30px -1px rgba(46, 46, 56, 1);
     box-shadow: 0px 0px 30px -1px rgba(46, 46, 46, 1);
 }
-
+.thumbnail {
+    padding: 0 0 10px;
+}
+.thumbnail img {
+    width: 100%;
+}
 #new {
     padding: 5px;
     animation: fadeout 8s;
