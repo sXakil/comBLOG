@@ -9,7 +9,7 @@ $(document).ready(function() {
         }
         $.ajax({
             method: 'POST',
-            url: '/campgrounds/' + $('#post-comment').data('comment-id') + '/comment',
+            url: '/blogs/' + $('#post-comment').data('comment-id') + '/comment',
             success: function() {
                 $(template).appendTo('#list');
                 $('#new .comment-author').html($('#author').val());
@@ -30,11 +30,11 @@ var template = '<article class="row" id="new">' +
     '<div class="col-md-2 col-sm-2 hidden-xs">' +
     '<div class="thumbnail">' +
     '<img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">' +
-    '<figcaption class="text-center" class="comment-author"></figcaption>' +
+    '<figcaption style="text-align: center" class="comment-author"></figcaption>' +
     '</div></div>' +
     '<div class="col-md-10 col-sm-10">' +
     '<div class="panel panel-default arrow left">' +
     '<div class="panel-body">' +
     '<div class="comment-post">' +
     '<p class="comment-body"></p>' +
-    '</div></div></div></div></article><hr/>';
+    '</div></div></div></div></article>';

@@ -10,51 +10,54 @@ html
             .row.row-centered
                 .col-md-10.col-centered
                     .thumbnail
-                        img.img-responsive(src=campground.image width="400px")
+                        img.img-responsive(src=blog.image width="400px")
                         .caption-full
                             .pull-right 
-                                -var arr = campground.created.toISOString().split("-");
+                                -var arr = blog.created.toISOString().split("-");
                                 -var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
                                 h5= months[parseInt(arr[1],10)] + " " + parseInt(arr[1]) + ", " + arr[0]
                             h5
-                                if(currentUser && campground.author.id.equals(currentUser._id))
+                                if(currentUser && blog.author.id.equals(currentUser._id))
                                     p(style="color: grey; font-size: 16px")= "Posted by You"
                                 else 
-                                    p(style="color: grey; font-size: 16px")= "Posted by " + campground.author.username
+                                    p(style="color: grey; font-size: 16px")= "Posted by " + blog.author.username
                     .blog-heading
-                        p(style="color: darkslateblue; padding: 20")= campground.name
+                        p(style="color: lightslategrey; padding: 20")= blog.title
                     div(style="text-align: left; padding-bottom: 10px;")
-                        if(currentUser && campground.author.id.equals(currentUser._id))
-                            a(href=campground._id + "/edit")
+                        if(currentUser && blog.author.id.equals(currentUser._id))
+                            a(href=blog._id + "/edit")
                                 button.btn.btn-xs.btn-success Edit
-                            form(action="/campgrounds/" + campground._id + "?_method=DELETE" method="POST" style="display: inline;")
-                            button.btn.btn-xs.btn-danger Delete
-                    -var body = campground.description.replace(/(?:\r\n|\r|\n)/g, '<br/>')
+                            form(action="/blogs/" + blog._id + "?_method=DELETE" method="POST" style="display: inline;")
+                                button.btn.btn-xs.btn-danger Delete
+                    -var body = blog.blog.replace(/(?:\r\n|\r|\n)/g, '<br/>')
                     p.blog-body !{body}
                     .well
                         if(currentUser)
                             .form-group
                                 textarea.form-control#text(style="width: 100%" name="comment[text]" rows="5" placeholder="Write a comment")
                             .form-group 
-                                input.form-control#author(style="width: 50%" type="hidden" name="comment[author]" value=currentUser.firstName readonly)
+                                input.form-control#author(style="width: 50%" type="hidden" name="comment[author]" value=currentUser.username)
                             .form-group
-                                button.btn.btn-primary#post-comment(data-comment-id=campground._id) Post
+                                button.btn.btn-primary#post-comment(data-comment-id=blog._id) Post
                         else
                             p(style="text-align: center") 
                                 a(href="/login") Login
                                 |  to comment
-                    if(campground.comments.length)
+                    if(blog.comments.length)
                         h2.page-header Comments
                         section.comment-list#list
-                            for comment in campground.comments
+                        -var i = 0
+                            for comment in blog.comments
                                 article.row
                                     .col-md-2.col-sm-2.hidden-xs
                                         .thumbnail
                                             img.img-responsive(src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png")
-                                            figcaption.text-center(id=campground.comments.length)= comment.author.username
+                                            figcaption(style="text-align: center")= comment.author.username
                                     .col-md-10.col-sm-10
                                         .panel.panel-default.arrow.left
                                             .panel-body
                                                 .comment-post
                                                     p= comment.text
-                                hr
+                                -i++
+                                if(i !== blog.comments.length) 
+                                    hr

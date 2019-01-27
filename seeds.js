@@ -1,5 +1,4 @@
-const Campground = require("./models/campground");
-const Comment = require("./models/comment");
+const db = require("./models");
 let data = [
     {
         name: "Cloud's Rest",
@@ -19,31 +18,31 @@ let data = [
 ];
 
 function seedDB() {
-    Campground.deleteMany({}, (err) => {
+    db.Blog.deleteMany({}, (err) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("Removed all campgrounds");
-            Comment.deleteMany({}, (err) => {
+            console.log("Removed all blog");
+            db.Comment.deleteMany({}, (err) => {
                 if (err) {
                     console.log(err)
                 } else {
                     console.log("Removed all comments!");
                     data.forEach((seed) => {
-                        Campground.create(seed, (err, campground) => {
+                        db.Blog.create(seed, (err, blog) => {
                             if (err) {
                                 console.log(err)
                             } else {
-                                console.log("Added new campground");
-                                Comment.create({
+                                console.log("Added new blog");
+                                db.Comment.create({
                                     text: "This is a comment",
                                     author: "Homer"
                                 }, (err, comment) => {
                                     if (err) {
                                         console.log(err)
                                     } else {
-                                        campground.comments.push(comment);
-                                        campground.save();
+                                        blog.comments.push(comment);
+                                        blog.save();
                                         console.log("Comment added!")
                                     }
                                 })

@@ -5,17 +5,17 @@ let db       = require("../models");
 router.get('/', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.Campground.find({}, (err, allCampgrounds) => {
+    db.Blog.find({}, (err, blogs) => {
         if(err) res.send(err)
-        else res.json(allCampgrounds);
+        else res.json(blogs);
     })
 })
 router.get('/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
+    db.Blog.findById(req.params.id).populate("comments").exec((err, blog) => {
         if(err) res.send(err)
-        else res.json(foundCampground);
+        else res.json(blog);
     })
 })
 

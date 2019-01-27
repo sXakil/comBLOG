@@ -12,19 +12,18 @@ html
                         span(style="font-weight: 900") COM
                         | !
                     p A simple blog created with NodeJS, Express and Mongo
-                    a.btn.btn-primary.btn-large(href="/campgrounds/new" style="font-weight: bold") 
+                    a.btn.btn-primary.btn-large(href="/blogs/new" style="font-weight: bold") 
                         i.fas.fa-plus  
                         |    New Blog
-
             row.text-center(style="display:flex; flex-wrap: wrap;")
-                for campground in campgrounds
+                for blog in blogs
                     .col-md-3.col-sm-6
                         .thumbnail
-                            img(src=campground.image)
+                            img(src=blog.image)
                             br
-                            a= campground.author.username
+                            a= blog.author.username
                         .caption
-                            h4=campground.name
-                        a(href="/campgrounds/" + campground._id).btn.btn-primary 
+                            h4=blog.title
+                        a(href="/blogs/" + blog._id).btn.btn-primary 
                             i.fas.fa-chevron-circle-down
                             |  Read More

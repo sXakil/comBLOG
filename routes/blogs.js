@@ -3,26 +3,26 @@ let router   = express.Router();
 let db       = require("../models");
 
 router.get("/", (req, res) => {
-    db.Campground.find({}, (err, allCampgrounds) => {
+    db.Blog.find({}, (err, blogs) => {
         if(err){
             res.send(err);
         } else {
-            res.render("index",{campgrounds:allCampgrounds, pretty: true});
+            res.render("index",{blogs : blogs, pretty: true});
         }
     });
 });
 
 router.post("/", isLoggedIn, (req, res) => {
-    let newCampground = {
-        name: req.body.name, 
+    let newBlog = {
+        title: req.body.title, 
         image: req.body.image, 
-        description: req.body.description,
+        blog: req.body.body,
         author: {
             id: req.user._id,
             username: req.user.username
         }
     };
-    db.Campground.create(newCampground, (err) => {
+    db.Blog.create(newBlog, (err) => {
         if(err){
             res.send(err);
         } else {
@@ -36,43 +36,43 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    db.Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
+    db.Blog.findById(req.params.id).populate("comments").exec((err, blog) => {
         if(err){
             res.send(err);
         } else {
-            res.render("show", {campground: foundCampground, pretty: true});
+            res.render("show", {blog : blog, pretty: true});
         }
     });
 });
 
 router.get("/:id/edit", isAuthorized, (req, res) => {
-    db.Campground.findById(req.params.id, (err, foundCampground) => {
-        res.render("edit", {campground: foundCampground});
+    db.Blog.findById(req.params.id, (err, blog) => {
+        res.render("edit", {blog: blog});
     })
 });
 
 router.put("/:id", isAuthorized, (req, res) => {
-    db.Campground.findByIdAndUpdate(req.params.id, req.body.camp, (err, updatedCampground) => {
+    db.Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
         if(err) {
             res.send(err);
         } else {
-            res.redirect("/campgrounds/" + updatedCampground._id)
+            res.redirect("/blogs/" + updatedBlog._id)
         }
     })
 })
 
 router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
-    db.Campground.findByIdAndRemove(req.params.id, (err) => {
+    db.Blog.findByIdAndRemove(req.params.id, (err) => {
         if(err) {
             res.send(err);
         } else {
-            res.redirect("/campgrounds");
+            res.redirect("/blogs");
         }
     })
 })
 
 router.post("/:id/comment", isLoggedIn, (req, res) => {
-    db.Campground.findById(req.params.id, (err, campground) => {
+    db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
         } else {
@@ -83,9 +83,9 @@ router.post("/:id/comment", isLoggedIn, (req, res) => {
                     comment.author.id = req.user._id;
                     comment.author.username = req.user.username;
                     comment.save();
-                    campground.comments.push(comment);
-                    campground.save();
-                    res.redirect("/campgrounds/" + campground._id + "#" + campground.comments.length)
+                    blog.comments.push(comment);
+                    blog.save();
+                    res.redirect("/blogs/" + blog._id)
                 }
             });
         }
@@ -101,11 +101,11 @@ function isLoggedIn(req, res, next) {
 
 function isAuthorized(req, res, next) {
     if(req.isAuthenticated()) {
-        db.Campground.findById(req.params.id, (err, foundCampground) => {
+        db.Blog.findById(req.params.id, (err, blog) => {
             if(err) {
                 console.log(err);
             } else {
-                if(foundCampground.author.id.equals(req.user._id)) {
+                if(blog.author.id.equals(req.user._id)) {
                     next();
                 } else {
                     res.send("Permission denied!")

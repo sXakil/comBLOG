@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/yelp_camp", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost/blog_v1", {useNewUrlParser: true});
 mongoose.Promise = Promise;
 
 module.exports = {
-    Campground : require("./campground"),
+    Blog : require("./blog"),
     Comment : require("./comment"),
     User : require("./user")
 }

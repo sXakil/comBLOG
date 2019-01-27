@@ -9,16 +9,15 @@ html
             .row
                 h1(style="text-align: center") Write a new Blog
                 div(style="width: 40%; margin: 25px auto;")
-                    form(action="/campgrounds" method="POST")
+                    form(action="/blogs" method="POST")
                         .form-group
-                            input.form-control(type="text" name="name" placeholder="Name")
+                            input.form-control(type="text" name="title" placeholder="Name")
                         .form-group
                             input.form-control(type="text" name="image" placeholder="Image URL")
                         .form-group
-                            textarea.form-control(name="description" rows="10" placeholder="Description")
+                            textarea.form-control(name="body" rows="10" placeholder="Blog body goes here...")
                         .form-group
                             button.btn.btn-lg.btn-primary.btn-block Post
-
-                    a(href="/campgrounds")
+                    a(href="/blogs")
                         i.fas.fa-arrow-left
                         |  Go Back
