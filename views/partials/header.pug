@@ -20,13 +20,13 @@ mixin menu
                     span.icon-bar
             .collapse.navbar-collapse#bs-example-navbar-collapse-1
                 ul.nav.navbar-nav.navbar-right
-                    if(!currentUser)
-                        li
-                            a(href="/login") Login
-                        li
-                            a(href="/register") Sign Up
-                    else
+                    if(currentUser)
                         li
                             a= "Hello, " + currentUser.firstName
                         li
                             a(href="/logout") Logout
+                    else
+                        li
+                            a(href="/login") Login
+                        li
+                            a(href="/register") Sign Up
