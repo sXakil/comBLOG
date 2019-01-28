@@ -7,7 +7,8 @@ const express        = require("express"),
     db               = require("./models"),
     seedDB           = require("./seeds");
 /* routes */
-let blogsRoute = require("./routes/blogs"),
+let blogsRoute      = require("./routes/blogs"),
+    commentsRoute   = require("./routes/comments"),
     authRoute       = require("./routes/auth"),
     apiRoute        = require("./routes/api");
 
@@ -37,6 +38,7 @@ app.use(function(req, res, next){
 });
 app.use(authRoute);
 app.use('/blogs', blogsRoute);
+app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
 app.listen(3000, "localhost", function(){

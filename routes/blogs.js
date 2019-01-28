@@ -38,11 +38,11 @@ router.get("/new", isLoggedIn, (req, res) => {
 router.get("/:id", (req, res) => {
     db.Blog.findById(req.params.id).populate("comments").exec((err, blog) => {
         if(err){
-            res.send(err);
+            res.send(err)
         } else {
-            res.render("show", {blog : blog, pretty: true});
+            res.render("show", {blog : blog, pretty: true})
         }
-    });
+    })
 });
 
 router.get("/:id/edit", isAuthorized, (req, res) => {
@@ -62,41 +62,27 @@ router.put("/:id", isAuthorized, (req, res) => {
 })
 
 router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
-    db.Blog.findByIdAndRemove(req.params.id, (err) => {
+    db.Blog.findByIdAndRemove(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
         } else {
+            blog.comments.forEach((comment) => {
+                db.Comment.findByIdAndRemove(comment._id, (err) => {
+                    if(err) {
+                        res.send(err);
+                    }
+                })
+            })
             res.redirect("/blogs");
         }
     })
 })
 
-router.post("/:id/comment", isLoggedIn, (req, res) => {
-    db.Blog.findById(req.params.id, (err, blog) => {
-        if(err) {
-            res.send(err);
-        } else {
-            db.Comment.create(req.body.comment, (err, comment) => {
-                if(err) {
-                    console.log(err)
-                } else {
-                    comment.author.id = req.user._id;
-                    comment.author.username = req.user.username;
-                    comment.save();
-                    blog.comments.push(comment);
-                    blog.save();
-                    res.redirect("/blogs/" + blog._id)
-                }
-            });
-        }
-    })
-});
-
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
-        return next();
+        return next()
     }
-    res.redirect("/login");
+    res.redirect("/login")
 }
 
 function isAuthorized(req, res, next) {
@@ -106,7 +92,7 @@ function isAuthorized(req, res, next) {
                 console.log(err);
             } else {
                 if(blog.author.id.equals(req.user._id)) {
-                    next();
+                    next()
                 } else {
                     res.send("Permission denied!")
                 }
