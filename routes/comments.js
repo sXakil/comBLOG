@@ -16,7 +16,7 @@ router.post("/:id/comment", isLoggedIn, (req, res) => {
                     comment.save();
                     blog.comments.push(comment);
                     blog.save();
-                    res.redirect("/blogs/" + blog._id)
+                    res.send(comment);
                 }
             });
         }
@@ -34,7 +34,7 @@ router.delete("/:id/comment/:comId", isAuthorized, isLoggedIn, (req, res) => {
                 } else {
                     blog.comments.pull(comment);
                     blog.save();
-                    res.redirect("/blogs/" + blog._id)
+                    res.redirect("/blogs/" + blog._id);
                 }
             });
         }

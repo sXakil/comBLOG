@@ -44,7 +44,7 @@ html
                             .form-group 
                                 input.form-control#author(style="width: 50%" type="hidden" name="comment[author]" value=currentUser.username)
                             .form-group
-                                button.btn.btn-primary#post-comment(data-comment-id=blog._id) Post
+                                button.btn.btn-primary#post-comment(data-blog-id=blog._id) Post
                         else
                             p(style="text-align: center") 
                                 a(href="/login") Login
@@ -64,8 +64,12 @@ html
                                             .panel-body
                                                 .comment-post
                                                     p= comment.text
-                                        form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    
-                                            button.btn-sm.btn-danger Delete
+                                        if(currentUser && blog.author.id.equals(currentUser._id))
+                                            button.btn.btn-xs.btn-success 
+                                                i.fas.fa-edit
+                                            form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    
+                                                button.btn.btn-xs.btn-danger
+                                                    i.fas.fa-trash-alt
                                 -i++
                                 if(i !== blog.comments.length) 
                                     hr
