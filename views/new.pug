@@ -3,6 +3,7 @@ doctype html
 html
     head
         +head
+        script(src="/js/generate-blog-text.js")
     body
         +menu
         .container
@@ -11,11 +12,12 @@ html
                 div(style="width: 40%; margin: 25px auto;")
                     form(action="/blogs" method="POST")
                         .form-group
-                            input.form-control(type="text" name="title" placeholder="Name")
+                            input.form-control.input-lg#title(type="text" name="title" placeholder="Name")
                         .form-group
-                            input.form-control(type="text" name="image" placeholder="Image URL")
+                            input.form-control#image(type="text" name="image" placeholder="Image URL")
                         .form-group
-                            textarea.form-control(name="body" rows="10" placeholder="Blog body goes here...")
+                            textarea.form-control#body(name="body" rows="10" placeholder="Blog body goes here...")
+                            button.btn#generate(type="button") Generate
                         .form-group
                             button.btn.btn-lg.btn-primary.btn-block Post
                     a(href="/blogs")

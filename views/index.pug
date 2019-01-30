@@ -19,7 +19,7 @@ html
                 for blog in blogs
                     .col-md-3.col-sm-6
                         .thumbnail
-                            img(src=blog.image)
+                            img.preview(src=blog.image)
                             br
                             a= blog.author.username
                         .caption
@@ -27,3 +27,4 @@ html
                         a(href="/blogs/" + blog._id).btn.btn-primary 
                             i.fas.fa-chevron-circle-down
                             |  Read More
+                        p

@@ -7,11 +7,11 @@ const commentSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        username: String,
-        created: {
-            type: Date,
-            default: Date.now
-        },
+        username: String
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 

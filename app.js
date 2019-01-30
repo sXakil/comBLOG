@@ -42,5 +42,5 @@ app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
 app.listen(3000, "localhost", function(){
-    console.log("Server Has Started!");
+    console.log("Server launched!");
 });

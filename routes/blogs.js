@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
         if(err){
             res.send(err);
         } else {
+            console.log(blogs)
             res.render("index",{blogs : blogs, pretty: true});
         }
     });
@@ -36,7 +37,9 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    db.Blog.findById(req.params.id).populate("comments").exec((err, blog) => {
+    db.Blog.findById(req.params.id)
+    .populate("comments")
+    .exec((err, blog) => {
         if(err){
             res.send(err)
         } else {

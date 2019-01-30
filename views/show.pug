@@ -57,14 +57,14 @@ html
                                 article.row
                                     .col-md-2.col-sm-2.hidden-xs
                                         .thumbnail
-                                            img.img-responsive(src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png")
+                                            img.img-responsive(src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-circle-512.png")
                                             figcaption(style="text-align: center")= comment.author.username
                                     .col-md-10.col-sm-10
                                         .panel.panel-default.arrow.left
                                             .panel-body
                                                 .comment-post
                                                     p= comment.text
-                                        if(currentUser && blog.author.id.equals(currentUser._id))
+                                        if(currentUser && comment.author.id.equals(currentUser._id))
                                             button.btn.btn-xs.btn-success 
                                                 i.fas.fa-edit
                                             form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    

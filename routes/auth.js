@@ -9,7 +9,7 @@ router.get("/", function(req, res){
 });
 
 // show register form
-router.get("/register", function(req, res){
+router.get("/register", isAlreadyLoggedIn, function(req, res){
     res.render("register");
 });
 
@@ -32,7 +32,7 @@ router.post("/register", function(req, res){
 });
 
 //show login form
-router.get("/login", function(req, res){
+router.get("/login", isAlreadyLoggedIn, function(req, res){
     res.render("login");
 });
 
@@ -51,11 +51,11 @@ router.get("/logout", function(req, res){
 });
 
 //middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
+function isAlreadyLoggedIn(req, res, next) {
+    if (!req.isAuthenticated()) {
+        return next()
     }
-    res.redirect("/login");
+    res.redirect('back');
 }
 
 module.exports = router;
