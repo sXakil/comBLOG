@@ -1,6 +1,6 @@
-let express  = require("express");
-let router   = express.Router();
-let db       = require("../models");
+let express    = require("express");
+let router     = express.Router();
+let db         = require("../models");
 let middleware = require("../middleware");
 
 router.post("/:id/comment", middleware.isLoggedIn, (req, res) => {

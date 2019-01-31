@@ -5,6 +5,8 @@ const express        = require("express"),
     LocalStrategy    = require("passport-local"),
     methodOverride   = require("method-override"),
     db               = require("./models"),
+    flash            = require("connect-flash"),
+    back             = require('express-back');
     seedDB           = require("./seeds");
 /* routes */
 let blogsRoute      = require("./routes/blogs"),
@@ -31,11 +33,12 @@ app.use(passport.session());
 passport.use(new LocalStrategy(db.User.authenticate()));
 passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
-
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 });
+app.use(back());
+app.use(flash());
 app.use(authRoute);
 app.use('/blogs', blogsRoute);
 app.use('/blogs', commentsRoute);

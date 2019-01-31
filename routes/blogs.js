@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
         if(err){
             res.send(err);
         } else {
-            res.render("index",{blogs : blogs, pretty: true});
+            res.render("index",{blogs : blogs, warning: req.flash('warning'), pretty: true});
         }
     });
 });
@@ -43,7 +43,7 @@ router.get("/:id", (req, res) => {
         if(err){
             res.send(err)
         } else {
-            res.render("show", {blog : blog, pretty: true})
+            res.render("show", {blog : blog, warning: req.flash('warning'), pretty: true})
         }
     })
 });

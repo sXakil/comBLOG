@@ -8,6 +8,8 @@ html
         +menu
         .container
             .row.row-centered
+                if(warning && warning.length !== 0)
+                    .alert.alert-warning= warning
                 .col-md-10.col-centered
                     .thumbnail
                         img.img-responsive(src=blog.image width="400px")

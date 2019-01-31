@@ -7,6 +7,10 @@ html
         +menu
         .container
             .row
+                if(error.length !== 0)
+                    .alert.alert-danger= error
+                if(warning && warning.length !== 0)
+                    .alert.alert-warning= warning
                 .jumbotron
                     h1(style="text-align: center; color: #777") Login to blog
                         span(style="font-weight: 900") COM

@@ -2,6 +2,7 @@ var express  = require("express");
 var router   = express.Router();
 var passport = require("passport");
 let db       = require("../models");
+//let flash    = require("connect-flash");
 let middleware = require("../middleware");
 
 //root route
@@ -33,17 +34,14 @@ router.post("/register", function(req, res){
 });
 //show login form
 router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
-    res.render("login");
+    res.render("login", {error: req.flash('error')});
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local",
-    {
-        successRedirect: "/blogs",
+router.post("/login", passport.authenticate("local", {
+        successReturnToOrRedirect: "/blogs",
         failureRedirect: "/login"
-    }), function(req, res){
-    
-});
+}));
 
 // logout route
 router.get("/logout", function(req, res){

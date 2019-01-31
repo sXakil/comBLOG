@@ -1,8 +1,11 @@
+let db = require("../models");
+
 module.exports = mwObject = {
     isLoggedIn: function(req, res, next) {
         if (req.isAuthenticated()) {
             return next();
         }
+        req.flash("error", "You need to be logged in!");
         res.redirect("/login");
     },
     isAuthorized: function(req, res, next) {
@@ -14,18 +17,21 @@ module.exports = mwObject = {
                     if(blog.author.id.equals(req.user._id)) {
                         next();
                     } else {
-                        res.send("Permission denied!")
+                        req.flash("warning", "Permission denied!");
+                        res.back();
                     }
                 }
             })
         } else {
-            res.send("Permission denied!")
+            req.flash("error", "You need to be logged in!");
+            res.redirect("/login");
         }
     },
     isAlreadyLoggedIn: function(req, res, next) {
         if (!req.isAuthenticated()) {
             return next()
         }
-        res.redirect('back');
+        req.flash("warning", "You are already logged in!");
+        res.back();
     }
 };

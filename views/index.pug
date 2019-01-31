@@ -6,6 +6,8 @@ html
     body
         +menu
         .container
+            if(warning && warning.length !== 0)
+                .alert.alert-warning= warning
             header.jumbotron
                 .container
                     h1 Welcome To blog
