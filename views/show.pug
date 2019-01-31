@@ -47,7 +47,7 @@ html
                                 button.btn.btn-primary#post-comment(data-blog-id=blog._id) Post
                         else
                             p(style="text-align: center") 
-                                a(href="/login") Login
+                                a(href="/login?ref=" + blog._id) Login
                                 |  to comment
                     if(blog.comments.length)
                         h2.page-header Comments

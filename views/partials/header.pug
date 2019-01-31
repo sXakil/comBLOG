@@ -1,8 +1,10 @@
 mixin head
     title= "blogCOM"
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
     script(src="//code.jquery.com/jquery-1.11.1.min.js")
     script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+    script(src="/js/main.js")
     link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous")
     link(rel="stylesheet" href="/stylesheets/app.css")
     link(rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon")
@@ -28,6 +30,15 @@ mixin menu
                             a(href="/logout") Logout
                     else
                         li
-                            a(href="/login") Login
+                            a#login(href="#") Login
+                            .popup
+                                .popupbody#loginPopup
+                                    form(action="/login" method="POST" style="text-align: center")
+                                        .form-group
+                                            input.form-control(type="text" name="username" placeholder="Username")
+                                        .form-group
+                                            input.form-control(type="password" name="password" placeholder="Password")
+                                        .form-group
+                                            button.btn.btn-xs.btn-primary Log In
                         li
                             a(href="/register") Sign Up

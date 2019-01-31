@@ -30,7 +30,6 @@ router.post("/register", function(req, res){
         });
     });
 });
-
 //show login form
 router.get("/login", isAlreadyLoggedIn, function(req, res){
     res.render("login");
@@ -42,6 +41,7 @@ router.post("/login", passport.authenticate("local",
         successRedirect: "/blogs",
         failureRedirect: "/login"
     }), function(req, res){
+    
 });
 
 // logout route
