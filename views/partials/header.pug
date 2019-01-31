@@ -42,3 +42,14 @@ mixin menu
                                             button.btn.btn-xs.btn-primary Log In
                         li
                             a(href="/register") Sign Up
+
+mixin flashMessage
+    if(error)
+        for e in error
+            .alert.alert-danger.flashMessage= e
+    if(warning)
+        for w in warning
+            .alert.alert-warning.flashMessage= w
+    if(success)
+        for s in success
+            .alert.alert-success.flashMessage= s

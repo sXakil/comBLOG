@@ -11,3 +11,11 @@ $(document).ready(function() {
         }
     })
 });
+
+$(function() {
+    setTimeout(function() {
+        $(".flashMessage").each(function (index, element) {
+            $(element).hide(1000)
+        })
+    }, 5000);
+});

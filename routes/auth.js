@@ -12,7 +12,7 @@ router.get("/", function(req, res){
 
 // show register form
 router.get("/register", middleware.isAlreadyLoggedIn, function(req, res){
-    res.render("register");
+    res.render("register", {error: req.flash('error')});
 });
 
 //handle sign up logic
@@ -24,12 +24,22 @@ router.post("/register", function(req, res){
     });
     db.User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err);
-            return res.render("register");
+            if(err.errors) {
+                var errs = [];
+                for(var e in err.errors) {
+                    errs.push(err.errors[e].message)
+                }
+                req.flash("error", errs)
+            }
+            else {
+                req.flash("error", err.message)
+            }
+            res.redirect("/register");
+        } else {
+            passport.authenticate("local")(req, res, function(){
+                res.redirect("/blogs");
+            });
         }
-        passport.authenticate("local")(req, res, function(){
-            res.redirect("/blogs");
-        });
     });
 });
 //show login form
@@ -40,7 +50,8 @@ router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
 //handling login logic
 router.post("/login", passport.authenticate("local", {
         successReturnToOrRedirect: "/blogs",
-        failureRedirect: "/login"
+        failureRedirect: "/login",
+        failureFlash: true
 }));
 
 // logout route
