@@ -1,8 +1,9 @@
-let express = require("express");
+let express  = require("express");
 let router   = express.Router();
 let db       = require("../models");
+let mwObject = require("../middleware");
 
-router.post("/:id/comment", isLoggedIn, (req, res) => {
+router.post("/:id/comment", mwObject.isLoggedIn, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
@@ -23,7 +24,7 @@ router.post("/:id/comment", isLoggedIn, (req, res) => {
     })
 });
 
-router.delete("/:id/comment/:comId", isAuthorized, isLoggedIn, (req, res) => {
+router.delete("/:id/comment/:comId", mwObject.isAuthorized, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
@@ -40,31 +41,5 @@ router.delete("/:id/comment/:comId", isAuthorized, isLoggedIn, (req, res) => {
         }
     })
 })
-
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
-
-function isAuthorized(req, res, next) {
-    if(req.isAuthenticated()) {
-        db.Blog.findById(req.params.id, (err, blog) => {
-            if(err) {
-                console.log(err);
-            } else {
-                if(blog.author.id.equals(req.user._id)) {
-                    next();
-                } else {
-                    res.send("Permission denied!")
-                }
-            }
-        })
-    } else {
-        res.send("Permission denied!")
-    }
-}
 
 module.exports = router;

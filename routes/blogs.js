@@ -1,6 +1,7 @@
-let express = require("express");
+let express  = require("express");
 let router   = express.Router();
 let db       = require("../models");
+let mwObject = require("../middleware");
 
 router.get("/", (req, res) => {
     db.Blog.find({}, (err, blogs) => {
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", mwObject.isLoggedIn, (req, res) => {
     let newBlog = {
         title: req.body.title, 
         image: req.body.image, 
@@ -31,7 +32,7 @@ router.post("/", isLoggedIn, (req, res) => {
     });
 });
 
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", mwObject.isLoggedIn, (req, res) => {
     res.render("new", {pretty: true});
 });
 
@@ -47,13 +48,13 @@ router.get("/:id", (req, res) => {
     })
 });
 
-router.get("/:id/edit", isAuthorized, (req, res) => {
+router.get("/:id/edit", mwObject.isAuthorized, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         res.render("edit", {blog: blog});
     })
 });
 
-router.put("/:id", isAuthorized, (req, res) => {
+router.put("/:id", mwObject.isAuthorized, (req, res) => {
     db.Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
         if(err) {
             res.send(err);
@@ -63,7 +64,7 @@ router.put("/:id", isAuthorized, (req, res) => {
     })
 })
 
-router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
+router.delete("/:id", mwObject.isAuthorized, (req, res) => {
     db.Blog.findByIdAndRemove(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
@@ -79,30 +80,5 @@ router.delete("/:id", isAuthorized, isLoggedIn, (req, res) => {
         }
     })
 })
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next()
-    }
-    res.redirect("/login")
-}
-
-function isAuthorized(req, res, next) {
-    if(req.isAuthenticated()) {
-        db.Blog.findById(req.params.id, (err, blog) => {
-            if(err) {
-                console.log(err);
-            } else {
-                if(blog.author.id.equals(req.user._id)) {
-                    next()
-                } else {
-                    res.send("Permission denied!")
-                }
-            }
-        })
-    } else {
-        res.send("Permission denied!")
-    }
-}
 
 module.exports = router;

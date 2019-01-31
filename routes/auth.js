@@ -2,6 +2,7 @@ var express  = require("express");
 var router   = express.Router();
 var passport = require("passport");
 let db       = require("../models");
+let mwObject = require("../middleware");
 
 //root route
 router.get("/", function(req, res){
@@ -9,7 +10,7 @@ router.get("/", function(req, res){
 });
 
 // show register form
-router.get("/register", isAlreadyLoggedIn, function(req, res){
+router.get("/register", mwObject.isAlreadyLoggedIn, function(req, res){
     res.render("register");
 });
 
@@ -31,7 +32,7 @@ router.post("/register", function(req, res){
     });
 });
 //show login form
-router.get("/login", isAlreadyLoggedIn, function(req, res){
+router.get("/login", mwObject.isAlreadyLoggedIn, function(req, res){
     res.render("login");
 });
 
@@ -49,13 +50,5 @@ router.get("/logout", function(req, res){
     req.logout();
     res.redirect("/blogs");
 });
-
-//middleware
-function isAlreadyLoggedIn(req, res, next) {
-    if (!req.isAuthenticated()) {
-        return next()
-    }
-    res.redirect('back');
-}
 
 module.exports = router;
