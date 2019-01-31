@@ -2,7 +2,7 @@ var express  = require("express");
 var router   = express.Router();
 var passport = require("passport");
 let db       = require("../models");
-let mwObject = require("../middleware");
+let middleware = require("../middleware");
 
 //root route
 router.get("/", function(req, res){
@@ -10,7 +10,7 @@ router.get("/", function(req, res){
 });
 
 // show register form
-router.get("/register", mwObject.isAlreadyLoggedIn, function(req, res){
+router.get("/register", middleware.isAlreadyLoggedIn, function(req, res){
     res.render("register");
 });
 
@@ -32,7 +32,7 @@ router.post("/register", function(req, res){
     });
 });
 //show login form
-router.get("/login", mwObject.isAlreadyLoggedIn, function(req, res){
+router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
     res.render("login");
 });
 

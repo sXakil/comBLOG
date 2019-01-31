@@ -1,7 +1,7 @@
 let express  = require("express");
 let router   = express.Router();
 let db       = require("../models");
-let mwObject = require("../middleware");
+let middleware = require("../middleware");
 
 router.get("/", (req, res) => {
     db.Blog.find({}, (err, blogs) => {
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", mwObject.isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
     let newBlog = {
         title: req.body.title, 
         image: req.body.image, 
@@ -32,7 +32,7 @@ router.post("/", mwObject.isLoggedIn, (req, res) => {
     });
 });
 
-router.get("/new", mwObject.isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
     res.render("new", {pretty: true});
 });
 
@@ -48,13 +48,13 @@ router.get("/:id", (req, res) => {
     })
 });
 
-router.get("/:id/edit", mwObject.isAuthorized, (req, res) => {
+router.get("/:id/edit", middleware.isAuthorized, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         res.render("edit", {blog: blog});
     })
 });
 
-router.put("/:id", mwObject.isAuthorized, (req, res) => {
+router.put("/:id", middleware.isAuthorized, (req, res) => {
     db.Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
         if(err) {
             res.send(err);
@@ -64,7 +64,7 @@ router.put("/:id", mwObject.isAuthorized, (req, res) => {
     })
 })
 
-router.delete("/:id", mwObject.isAuthorized, (req, res) => {
+router.delete("/:id", middleware.isAuthorized, (req, res) => {
     db.Blog.findByIdAndRemove(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);

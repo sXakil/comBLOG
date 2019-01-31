@@ -1,9 +1,9 @@
 let express  = require("express");
 let router   = express.Router();
 let db       = require("../models");
-let mwObject = require("../middleware");
+let middleware = require("../middleware");
 
-router.post("/:id/comment", mwObject.isLoggedIn, (req, res) => {
+router.post("/:id/comment", middleware.isLoggedIn, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
@@ -24,7 +24,7 @@ router.post("/:id/comment", mwObject.isLoggedIn, (req, res) => {
     })
 });
 
-router.delete("/:id/comment/:comId", mwObject.isAuthorized, (req, res) => {
+router.delete("/:id/comment/:comId", middleware.isAuthorized, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
