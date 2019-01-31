@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $("#login").on('click', function(e) {
         e.stopPropagation();
-        console.log('clicked');
         $("#loginPopup").toggleClass("show");
     })
     $(document).mouseup(function(e) {
