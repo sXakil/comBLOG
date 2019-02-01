@@ -24,7 +24,7 @@ router.post("/:id/comment", middleware.isLoggedIn, (req, res) => {
     })
 });
 
-router.delete("/:id/comment/:comId", middleware.isAuthorized, (req, res) => {
+router.delete("/:id/comment/:comId", middleware.isAuthorizedComment, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);

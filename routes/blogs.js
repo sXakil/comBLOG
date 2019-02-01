@@ -48,13 +48,13 @@ router.get("/:id", (req, res) => {
     })
 });
 
-router.get("/:id/edit", middleware.isAuthorized, (req, res) => {
+router.get("/:id/edit", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         res.render("edit", {blog: blog});
     })
 });
 
-router.put("/:id", middleware.isAuthorized, (req, res) => {
+router.put("/:id", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
         if(err) {
             res.send(err);
@@ -64,7 +64,7 @@ router.put("/:id", middleware.isAuthorized, (req, res) => {
     })
 })
 
-router.delete("/:id", middleware.isAuthorized, (req, res) => {
+router.delete("/:id", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findByIdAndRemove(req.params.id, (err, blog) => {
         if(err) {
             res.send(err);
