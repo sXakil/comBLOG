@@ -6,7 +6,7 @@ const express        = require("express"),
     methodOverride   = require("method-override"),
     db               = require("./models"),
     flash            = require("connect-flash"),
-    back             = require('express-back');
+    back             = require('express-back'),
     seedDB           = require("./seeds");
 /* routes */
 let blogsRoute      = require("./routes/blogs"),
@@ -44,6 +44,6 @@ app.use('/blogs', blogsRoute);
 app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
-app.listen(3000, "localhost", function(){
+app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server launched!");
 });
