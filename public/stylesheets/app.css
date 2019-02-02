@@ -2,9 +2,6 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans|Sarabun|PT+Sans);
 @import url(//fonts.googleapis.com/css?family=Black+Han+Sans);
 
-* {
-    color: #777
-}
 body {
     font-family: 'PT Sans', sans-serif;
 }
@@ -192,6 +189,7 @@ h1, h1 span {
 
 .thumbnail {
     position: relative;
+    overflow: hidden;
 }
 
 .thumbnail .mask img {
@@ -223,7 +221,32 @@ h1, h1 span {
 
 .mask:hover > .caption {
     display: none;
+    animation: fadeOut 1s;
 }
 .mask:hover > img { 
-    opacity: 1;
+    animation: fadeIn 1s;
 }
+
+@-webkit-keyframes prevFadeIn {
+    100% {opacity: 1;}
+  }
+  
+  @keyframes prevFadeIn {
+    100% {opacity: 1;}
+  }
+
+@-webkit-keyframes fadeOut {
+    100% {opacity: 0;}
+  }
+  
+  @keyframes fadeOut {
+    100% {opacity: 0;}
+  }
+
+  .zoom {
+    transition: transform .2s;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.5);
+  }
