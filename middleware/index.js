@@ -14,7 +14,7 @@ module.exports = mwObject = {
                 if(err) {
                     console.log(err);
                 } else {
-                    if(blog.comment.author.id.equals(req.user._id)) {
+                    if(blog.author.id.equals(req.user._id)) {
                         next();
                     } else {
                         req.flash("warning", "Permission denied!");

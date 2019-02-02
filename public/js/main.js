@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#login").on('click', function(e) {
+    $("#login").click(function(e) {
         e.stopPropagation();
         $("#loginPopup").toggleClass("show");
     })

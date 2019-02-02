@@ -32,7 +32,7 @@ var template =
 `<article class="row" id="new">
 	<div class="col-md-2 col-sm-2 hidden-xs">
 		<div class="thumbnail">
-			<img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
+			<img class="img-responsive" src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-circle-512.png">
 			<figcaption style="text-align: center" class="comment-author"></figcaption>
 		</div>
 	</div>
