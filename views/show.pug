@@ -11,7 +11,7 @@ html
                 +flashMessage
                 .col-md-10.col-centered
                     .thumbnail
-                        img.img-responsive(src=blog.image width="400px")
+                        img.img-responsive(src=blog.image style="max-height: 60vh; width: 100%")
                         .caption-full
                             .pull-right 
                                 -var arr = blog.created.toISOString().split("-");

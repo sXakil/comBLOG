@@ -6,26 +6,27 @@ html
     body
         +menu
         .container
-            +flashMessage
-            header.jumbotron
-                .container
-                    h1 Welcome To blog
-                        span(style="font-weight: 900") COM
-                        | !
-                    p A simple blog created with NodeJS, Express and Mongo
-                    a.btn.btn-primary.btn-large(href="/blogs/new" style="font-weight: bold") 
-                        i.fas.fa-plus  
-                        |    New Blog
-            row.text-center(style="display:flex; flex-wrap: wrap;")
-                for blog in blogs
-                    .col-md-3.col-sm-6
-                        .thumbnail
-                            img.preview(src=blog.image)
-                            br
-                            a= blog.author.username
-                        .caption
-                            h4=blog.title
-                        a(href="/blogs/" + blog._id).btn.btn-primary 
-                            i.fas.fa-chevron-circle-down
-                            |  Read More
-                        p
+            .row
+                +flashMessage
+                header.jumbotron
+                    .container
+                        h1 Welcome To blog
+                            span(style="font-weight: 900") COM
+                            | !
+                        p A simple blog created with NodeJS, Express and Mongo
+                        a.btn.btn-primary.btn-large(href="/blogs/new" style="font-weight: bold") 
+                            i.fas.fa-plus  
+                            |    New Blog
+                row.text-center(style="display:flex; flex-wrap: wrap;")
+                    for blog in blogs
+                        .col-md-3.col-sm-6
+                            .thumbnail.text-center
+                                .mask
+                                    img.img-responsive#prev(src=blog.image)
+                                    .caption
+                                        p=blog.title
+                                a= blog.author.username
+                            a(href="/blogs/" + blog._id).btn.btn-primary 
+                                i.fas.fa-chevron-circle-down
+                                |  Read More
+                            p

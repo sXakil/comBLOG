@@ -48,6 +48,10 @@ app.use('/blogs', blogsRoute);
 app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
+app.get('/*', (req, res) => {
+    res.render('404', {pretty: true});
+});
+
 /* starts the server */
 app.listen(3000, 'localhost', function(){
     console.log("Server launched!");

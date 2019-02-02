@@ -23,6 +23,8 @@ mixin menu
                     span.icon-bar
             .collapse.navbar-collapse#bs-example-navbar-collapse-1
                 ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href="/api") API
                     if(currentUser)
                         li
                             a= "Hello, " + currentUser.firstName
@@ -42,7 +44,7 @@ mixin menu
                                             button.btn.btn-xs.btn-primary Log In
                         li
                             a(href="/register") Sign Up
-
+                            
 mixin flashMessage
     if(error)
         for e in error
