@@ -18,7 +18,7 @@ let blogsRoute      = require("./routes/blogs"),
 
 app.use(bodyParser.urlencoded({extended: true})); //params and form data collector
 app.set("view engine", "pug"); //defaults .pug for view engine extensions
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public")); //makes the directory available to the client side
 app.use(methodOverride("_method")); //helps with the RESTful routing
 
 /* passport config */
