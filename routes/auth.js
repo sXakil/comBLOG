@@ -5,23 +5,23 @@ let db       = require("../models");
 let middleware = require("../middleware");
 
 /* index page */
-router.get("/", function(req, res){
+router.get("/", (req, res) => {
     res.redirect("/blogs")
 });
 
 /* registration form */
-router.get("/register", middleware.isAlreadyLoggedIn, function(req, res){
+router.get("/register", middleware.isAlreadyLoggedIn, (req, res) => {
     res.render("register", {error: req.flash('error')});
 });
 
 /* registration request */
-router.post("/register", function(req, res){
+router.post("/register", (req, res) => {
     var newUser = new db.User({
         username: req.body.username,
         firstName: req.body.firstName,
         surName: req.body.surName
     });
-    db.User.register(newUser, req.body.password, function(err, user){
+    db.User.register(newUser, req.body.password, (err, user) => {
         if(err){
             if(err.errors) {
                 var errs = [];
@@ -35,16 +35,16 @@ router.post("/register", function(req, res){
             }
             res.redirect("/register");
         } else {
-            passport.authenticate("local")(req, res, function(){
+            passport.authenticate("local")(req, res, () => {
                 res.redirect("/blogs");
-            });
+            })
         }
-    });
+    })
 });
 
 /* login form */
 router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
-    res.render("login", {error: req.flash('error')});
+    res.render("login", {error: req.flash('error')})
 });
 
 /* login request */
@@ -56,8 +56,8 @@ router.post("/login", passport.authenticate("local", {
 
 /* logout */
 router.get("/logout", function(req, res){
-    req.logout();
-    res.redirect("/blogs");
+    req.logout()
+    res.redirect("/blogs")
 });
 
 module.exports = router;
