@@ -3,6 +3,7 @@ let router     = express.Router();
 let db         = require("../models");
 let middleware = require("../middleware");
 
+/* new comment request */
 router.post("/:id/comment", middleware.isLoggedIn, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
@@ -24,6 +25,7 @@ router.post("/:id/comment", middleware.isLoggedIn, (req, res) => {
     })
 });
 
+/* delete a comment */
 router.delete("/:id/comment/:comId", middleware.isAuthorizedComment, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {

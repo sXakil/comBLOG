@@ -2,6 +2,7 @@ let express  = require("express");
 let router   = express.Router();
 let db       = require("../models");
 
+/* all blog preview */
 router.get('/', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -10,6 +11,8 @@ router.get('/', (req, res) => {
         else res.json(blogs);
     })
 })
+
+/* singular blog lookup */
 router.get('/:id', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");

@@ -4,14 +4,17 @@ var passport = require("passport");
 let db       = require("../models");
 let middleware = require("../middleware");
 
+/* index page */
 router.get("/", function(req, res){
     res.redirect("/blogs")
 });
 
+/* registration form */
 router.get("/register", middleware.isAlreadyLoggedIn, function(req, res){
     res.render("register", {error: req.flash('error')});
 });
 
+/* registration request */
 router.post("/register", function(req, res){
     var newUser = new db.User({
         username: req.body.username,
@@ -39,16 +42,19 @@ router.post("/register", function(req, res){
     });
 });
 
+/* login form */
 router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
     res.render("login", {error: req.flash('error')});
 });
 
+/* login request */
 router.post("/login", passport.authenticate("local", {
         successReturnToOrRedirect: "/blogs",
         failureRedirect: "/login",
         failureFlash: true
 }));
 
+/* logout */
 router.get("/logout", function(req, res){
     req.logout();
     res.redirect("/blogs");

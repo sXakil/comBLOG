@@ -3,6 +3,7 @@ let router   = express.Router();
 let db       = require("../models");
 let middleware = require("../middleware");
 
+/* index page */
 router.get("/", (req, res) => {
     db.Blog.find({}, (err, blogs) => {
         if(err){
@@ -13,6 +14,7 @@ router.get("/", (req, res) => {
     });
 });
 
+/* new blog request */
 router.post("/", middleware.isLoggedIn, (req, res) => {
     let newBlog = {
         title: req.body.title, 
@@ -32,10 +34,12 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     });
 });
 
+/* new blog form */
 router.get("/new", middleware.isLoggedIn, (req, res) => {
     res.render("new", {pretty: true});
 });
 
+/* show page */
 router.get("/:id", (req, res) => {
     db.Blog.findById(req.params.id)
     .populate("comments")
@@ -48,12 +52,14 @@ router.get("/:id", (req, res) => {
     })
 });
 
+/* edit blog page */
 router.get("/:id/edit", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         res.render("edit", {blog: blog});
     })
 });
 
+/* update blog request */
 router.put("/:id", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
         if(err) {
@@ -64,6 +70,7 @@ router.put("/:id", middleware.isAuthorizedBlog, (req, res) => {
     })
 })
 
+/* delete blog request */
 router.delete("/:id", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findByIdAndRemove(req.params.id, (err, blog) => {
         if(err) {
