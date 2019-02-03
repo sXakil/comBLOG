@@ -21,6 +21,22 @@ exports.postComment = (req, res) => {
     })
 }
 
+exports.editCommentPage = (req, res) => {
+    db.Blog.findById(req.params.id, (err, blog) => {
+        if(err) {
+            res.send(err);
+        } else {
+            db.Comment.findById(req.params.comId, (err, comment) => {
+                if(err) {
+                    res.send(err);
+                } else {
+                    res.render("comments/edit", {blog : blog, comment : comment})
+                }
+            })
+        }
+    })
+}
+
 exports.updateComment = (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) {
