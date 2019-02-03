@@ -5,6 +5,7 @@ exports.indexAllBlog = (req, res) => {
         if(err){
             res.send(err);
         } else {
+            req.session.returnTo = '/';
             res.render("blogs/index",{blogs : blogs, warning: req.flash('warning'), pretty: true});
         }
     })
@@ -15,8 +16,9 @@ exports.showSelectedBlog = (req, res) => {
     .populate("comments")
     .exec((err, blog) => {
         if(err){
-            res.send(err)
+            res.redirect("/404");
         } else {
+            req.session.returnTo = '/blogs/' + blog._id;
             res.render("blogs/show", {blog : blog, warning: req.flash('warning'), success: req.flash('success'), pretty: true})
         }
     })

@@ -49,8 +49,12 @@ app.use('/blogs', blogsRoute);
 app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
-app.get('/*', (req, res) => {
+app.get('/404', (req, res) => {
     res.render('404', {pretty: true});
+});
+
+app.get('/*', (req, res) => {
+    res.redirect('/404');
 });
 
 /* starts the server */

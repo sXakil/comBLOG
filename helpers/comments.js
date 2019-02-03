@@ -65,6 +65,7 @@ exports.deleteComment = (req, res) => {
                 } else {
                     blog.comments.pull(comment);
                     blog.save();
+                    req.flash("success", "Comment deleted successfully");
                     res.redirect("/blogs/" + blog._id);
                 }
             });
