@@ -5,7 +5,7 @@ exports.indexAllBlog = (req, res) => {
         if(err){
             res.send(err);
         } else {
-            res.render("index",{blogs : blogs, warning: req.flash('warning'), pretty: true});
+            res.render("blogs/index",{blogs : blogs, warning: req.flash('warning'), pretty: true});
         }
     })
 };
@@ -17,7 +17,7 @@ exports.showSelectedBlog = (req, res) => {
         if(err){
             res.send(err)
         } else {
-            res.render("show", {blog : blog, warning: req.flash('warning'), pretty: true})
+            res.render("blogs/show", {blog : blog, warning: req.flash('warning'), success: req.flash('success'), pretty: true})
         }
     })
 };

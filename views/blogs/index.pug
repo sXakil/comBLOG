@@ -1,4 +1,4 @@
-include partials/header
+include ../partials/header
 doctype html
 html
     head
@@ -21,11 +21,12 @@ html
                     for blog in blogs
                         .col-md-3.col-sm-6
                             .thumbnail.text-center
-                                .mask
-                                    img.img-responsive#prev(src=blog.image)
-                                    .caption
-                                        p=blog.title
-                                a= blog.author.username
+                                a(href="/blogs/" + blog._id)
+                                    .mask
+                                        img.img-responsive#prev(src=blog.image)
+                                        .caption
+                                            p=blog.title
+                                //a= blog.author.username
                             a(href="/blogs/" + blog._id).btn.btn-primary 
                                 i.fas.fa-chevron-circle-down
                                 |  Read More

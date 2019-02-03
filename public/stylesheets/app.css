@@ -224,7 +224,7 @@ h1, h1 span {
     animation: fadeOut 1s;
 }
 .mask:hover > img { 
-    animation: fadeIn 1s;
+    animation: prevFadeIn 1s forwards;
 }
 
 @-webkit-keyframes prevFadeIn {

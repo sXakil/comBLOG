@@ -1,0 +1,21 @@
+include ../partials/header
+doctype html
+html
+    head
+        +head
+    body
+        +menu
+        .container
+            .row
+                +flashMessage
+                h1(style="text-align: center") Edit Blog
+                div(style="width: 40%; margin: 25px auto;")
+                    form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=PUT" method="POST")
+                        .form-group
+                            textarea.form-control(name="text" rows="10" placeholder="Comment body")= comment.text
+                        .form-group
+                            button.btn.btn-lg.btn-primary.btn-block Edit
+
+                    a(href="/blogs/" + blog._id)
+                        i.fas.fa-arrow-left
+                        |  Go Back

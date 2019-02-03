@@ -12,13 +12,13 @@ router.post("/", middleware.isLoggedIn, helpers.postNewBlog);
 
 /* new blog form */
 router.get("/new", middleware.isLoggedIn, (req, res) => {
-    res.render("new", {pretty: true});
+    res.render("blogs/new", {pretty: true});
 });
 
 /* edit blog page */
 router.get("/:id/edit", middleware.isAuthorizedBlog, (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
-        res.render("edit", {blog: blog});
+        res.render("blogs/edit", {blog: blog});
     })
 });
 

@@ -1,4 +1,4 @@
-include partials/header
+include ../partials/header
 doctype html
 html
     head
@@ -66,8 +66,9 @@ html
                                                 .comment-post
                                                     p= comment.text
                                         if(currentUser && comment.author.id.equals(currentUser._id))
-                                            button.btn.btn-xs.btn-success 
-                                                i.fas.fa-edit
+                                            a(href="/blogs/" + blog._id + "/comment/" + comment._id + "/edit")
+                                                button.btn.btn-xs.btn-success 
+                                                    i.fas.fa-edit
                                             form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    
                                                 button.btn.btn-xs.btn-danger
                                                     i.fas.fa-trash-alt

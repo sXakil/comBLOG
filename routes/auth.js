@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
 /* registration form */
 router.get("/register", middleware.isAlreadyLoggedIn, (req, res) => {
-    res.render("register", {error: req.flash('error')});
+    res.render("auth/register", {error: req.flash('error')});
 });
 
 /* registration request */
@@ -44,7 +44,7 @@ router.post("/register", (req, res) => {
 
 /* login form */
 router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
-    res.render("login", {error: req.flash('error')})
+    res.render("auth/login", {error: req.flash('error')})
 });
 
 /* login request */
