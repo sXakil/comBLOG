@@ -5,11 +5,15 @@
 body {
     font-family: 'PT Sans', sans-serif;
 }
-h1, h1 span {
+
+h1,
+h1 span {
     font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #777;
 }
-.jumbotron, .container {
+
+.jumbotron,
+.container {
     color: #777;
 }
 
@@ -21,18 +25,21 @@ h1, h1 span {
     margin-bottom: 25px;
     background-image: linear-gradient(rgb(230, 230, 240), rgb(250, 250, 250));
 }
+
 .row-centered {
-    text-align:center;
+    text-align: center;
 }
+
 .col-centered {
     padding-top: 15px;
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
+    display: inline-block;
+    float: none;
+    text-align: left;
+    margin-right: -4px;
     text-align: center;
     border: 1px solid #ddd;
 }
+
 .col-centered * {
     text-align: left;
 }
@@ -41,56 +48,70 @@ h1, h1 span {
     color: #333;
     font-size: 18px;
 }
+
 .comment-list .row {
     margin-bottom: 0px;
 }
+
 .comment-list .panel .panel-heading {
     padding: 4px 15px;
     position: absolute;
-    border:none;
-    border-top-right-radius:0px;
+    border: none;
+    border-top-right-radius: 0px;
     top: 1px;
 }
+
 .comment-list .panel .panel-heading.right {
     border-right-width: 0px;
-    border-top-left-radius:0px;
+    border-top-left-radius: 0px;
     right: 16px;
 }
+
 .comment-list .panel .panel-heading .panel-body {
     padding-top: 6px;
 }
+
 .comment-list figcaption {
     word-wrap: break-word;
 }
+
 @media (min-width: 768px) {
-    .comment-list .arrow:after, .comment-list .arrow:before {
+
+    .comment-list .arrow:after,
+    .comment-list .arrow:before {
         content: "";
         position: absolute;
         width: 0;
         height: 0;
         border: solid transparent;
     }
-    .comment-list .panel.arrow.left:after, .comment-list .panel.arrow.left:before {
+
+    .comment-list .panel.arrow.left:after,
+    .comment-list .panel.arrow.left:before {
         border-left: 0;
     }
+
     .comment-list .panel.arrow.left:before {
         left: 0px;
         top: 30px;
         border-right-color: inherit;
         border-width: 16px;
     }
+
     .comment-list .panel.arrow.left:after {
         left: 1px;
         top: 31px;
         border-right-color: #FFFFFF;
         border-width: 15px;
     }
+
     .comment-list .panel.arrow.right:before {
         right: -16px;
         top: 30px;
         border-left-color: inherit;
         border-width: 16px;
     }
+
     .comment-list .panel.arrow.right:after {
         right: -14px;
         top: 31px;
@@ -106,6 +127,7 @@ h1, h1 span {
 .caption-full {
     padding: 6px;
 }
+
 .error {
     width: 200px;
     height: 20px;
@@ -130,13 +152,16 @@ h1, h1 span {
     padding: 5px;
     animation: fadeout 8s;
 }
+
 @keyframes fadeout {
     0% {
         background: floralwhite;
     }
+
     70% {
         background: floralwhite;
     }
+
     100% {
         background: none;
     }
@@ -144,8 +169,8 @@ h1, h1 span {
 
 @media (max-width:768px) {
     .navbar-brand {
-        width:100px;
-        max-height:50px;
+        width: 100px;
+        max-height: 50px;
     }
 }
 
@@ -157,8 +182,9 @@ h1, h1 span {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  .popup .popupbody {
+}
+
+.popup .popupbody {
     visibility: hidden;
     width: 200px;
     background-color: #aab6b8;
@@ -170,21 +196,33 @@ h1, h1 span {
     z-index: 1;
     left: 50%;
     margin-left: -80px;
-  }
-  .popup .show {
+}
+
+.popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
-  }
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 
 .thumbnail {
@@ -197,6 +235,7 @@ h1, h1 span {
     max-height: 100vh;
     opacity: 0.4;
 }
+
 .mask {
     background-color: #000;
 }
@@ -219,34 +258,45 @@ h1, h1 span {
     font-size: 1.5em;
 }
 
-.mask:hover > .caption {
+.mask:hover>.caption {
     display: none;
     animation: fadeOut 1s;
 }
-.mask:hover > img { 
+
+.mask:hover>img {
     animation: prevFadeIn 1s forwards;
 }
 
 @-webkit-keyframes prevFadeIn {
-    100% {opacity: 1;}
-  }
-  
-  @keyframes prevFadeIn {
-    100% {opacity: 1;}
-  }
+    100% {
+        opacity: 1;
+        transform: rotate(10deg) scale(1.4);
+    }
+}
+
+@keyframes prevFadeIn {
+    100% {
+        opacity: 1;
+        transform: rotate(10deg) scale(1.4);
+    }
+}
 
 @-webkit-keyframes fadeOut {
-    100% {opacity: 0;}
-  }
-  
-  @keyframes fadeOut {
-    100% {opacity: 0;}
-  }
+    100% {
+        opacity: 0;
+    }
+}
 
-  .zoom {
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+    }
+}
+
+.zoom {
     transition: transform .2s;
-  }
-  
-  .zoom:hover {
+}
+
+.zoom:hover {
     transform: scale(1.5);
-  }
+}

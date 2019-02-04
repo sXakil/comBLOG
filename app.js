@@ -50,11 +50,12 @@ app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
 
 app.get('/404', (req, res) => {
-    res.render('404', {pretty: true});
+    res.render('404', {pretty: true, warning: req.flash('warning')});
 });
 
 app.get('/*', (req, res) => {
-    res.redirect('/404');
+    req.flash('warning', "Error 404! Page not found")
+    res.redirect('/404')
 });
 
 /* starts the server */

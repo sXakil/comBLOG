@@ -6,11 +6,16 @@ html
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
         script(src="//code.jquery.com/jquery-1.11.1.min.js")
         script(src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+        script(src="/js/main.js")
         script(src="/js/404.js")
+        link(rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon")
     body
-        .fullscreen.background(style="background-image:url('https://images.unsplash.com/gifs/weird/weird-10.gif');" data-img-width="1600" data-img-height="1064")
+        .fullscreen.background(style="background-image:url('/images/404.gif');" data-img-width="1600" data-img-height="1064")
             .content-a
                 .content-b
+                    if(warning)
+                        for w in warning
+                            .alert.alert-warning.flashMessage= w
                     p(style="font-size: 150px; font-family: 'Black Han Sans', sans-serif; color: white") 404
                     p(style="color: white; margin: 50px") Hm, the page you were looking for doesn't seem to exist anymore.
                     a(href="/" style="color: #777")
