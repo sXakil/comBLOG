@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
 /* registration form */
 router.get("/register", middleware.isAlreadyLoggedIn, (req, res) => {
-    res.render("auth/register", {error: req.flash('error')});
+    res.render("auth/register", {pretty: true});
 });
 
 /* registration request */
@@ -44,7 +44,7 @@ router.post("/register", (req, res) => {
 
 /* login form */
 router.get("/login", middleware.isAlreadyLoggedIn, function(req, res){
-    res.render("auth/login", {error: req.flash('error')})
+    res.render("auth/login", {pretty: true})
 });
 
 /* login request */
@@ -57,6 +57,7 @@ router.post("/login", passport.authenticate("local", {
 /* logout */
 router.get("/logout", function(req, res){
     req.logout()
+    req.flash("success", "Logged out successfully!")
     res.redirect("/blogs")
 });
 

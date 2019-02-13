@@ -6,7 +6,7 @@ exports.indexAllBlog = (req, res) => {
             res.send(err);
         } else {
             req.session.returnTo = '/';
-            res.render("blogs/index",{blogs : blogs, warning: req.flash('warning'), pretty: true});
+            res.render("blogs/index",{blogs : blogs, pretty: true});
         }
     })
 };
@@ -19,7 +19,7 @@ exports.showSelectedBlog = (req, res) => {
             res.redirect("/404");
         } else {
             req.session.returnTo = '/blogs/' + blog._id;
-            res.render("blogs/show", {blog : blog, warning: req.flash('warning'), success: req.flash('success'), pretty: true})
+            res.render("blogs/show", {blog : blog, pretty: true})
         }
     })
 };

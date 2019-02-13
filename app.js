@@ -34,14 +34,17 @@ passport.use(new LocalStrategy(db.User.authenticate()));
 passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
 
+app.use(back()); //keeps track of the previous link
+app.use(flash()); //handles the flash messages
+
 /* makes currentUser available to all routes */
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.warning     = req.flash('warning');
+    res.locals.success     = req.flash('success');
+    res.locals.error       = req.flash('error');
     next();
 });
-
-app.use(back()); //keeps track of the previous link
-app.use(flash()); //handles the flash messages
 
 /* use the routes */
 app.use(authRoute);
