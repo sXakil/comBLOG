@@ -2,7 +2,7 @@ let express    = require("express");
 let router     = express.Router();
 let db         = require("../models");
 let middleware = require("../middleware");
-let helpers  = require("../helpers/comments");
+let helpers    = require("../helpers/comments");
 
 /* new comment request */
 router.post("/:id/comment", middleware.isLoggedIn, helpers.postComment);

@@ -2,9 +2,8 @@ let db         = require("../models");
 
 exports.indexAllBlog = (req, res) => {
     db.Blog.find({}, (err, blogs) => {
-        if(err){
-            res.send(err);
-        } else {
+        if(err) res.send(err);
+        else {
             req.session.returnTo = '/';
             res.render("blogs/index",{blogs : blogs, pretty: true});
         }
@@ -15,9 +14,9 @@ exports.showSelectedBlog = (req, res) => {
     db.Blog.findById(req.params.id)
     .populate("comments")
     .exec((err, blog) => {
-        if(err){
-            res.redirect("/404");
-        } else {
+        if(err) res.redirect("/404")
+        if(!blog) res.render("404")
+        else {
             req.session.returnTo = '/blogs/' + blog._id;
             res.render("blogs/show", {blog : blog, pretty: true})
         }

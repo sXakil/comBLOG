@@ -2,9 +2,9 @@ let db         = require("../models");
 
 exports.postComment = (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
-        if(err) {
-            res.send(err);
-        } else {
+        if(err) res.send(err)
+        if(!blog) res.render("404")
+        else {
             db.Comment.create(req.body.comment, (err, comment) => {
                 if(err) {
                     console.log(err)
@@ -16,16 +16,16 @@ exports.postComment = (req, res) => {
                     blog.save();
                     res.send(comment);
                 }
-            });
+            })
         }
     })
 }
 
 exports.editCommentPage = (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
-        if(err) {
-            res.send(err);
-        } else {
+        if(err) res.send(err)
+        if(!blog) res.render("404")
+        else {
             db.Comment.findById(req.params.comId, (err, comment) => {
                 if(err) {
                     res.send(err);
@@ -39,9 +39,8 @@ exports.editCommentPage = (req, res) => {
 
 exports.updateComment = (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
-        if(err) {
-            res.send(err);
-        } else {
+        if(err) res.send(err)
+        else {
             db.Comment.findByIdAndUpdate(req.params.comId, {text : req.body.text}, (err) => {
                 if(err) {
                     res.send(err)
