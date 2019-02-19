@@ -27,7 +27,7 @@ mixin menu
                         a(href="/api" target="_new") API
                     if(currentUser)
                         li
-                            a= "Hello, " + currentUser.firstName
+                            a(href="/user/" + currentUser.username)= "Hello, " + currentUser.firstName
                         li
                             a(href="/logout") Logout
                     else

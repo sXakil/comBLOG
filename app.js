@@ -14,13 +14,14 @@ let blogsRoute      = require("./routes/blogs"),
     commentsRoute   = require("./routes/comments"),
     authRoute       = require("./routes/auth"),
     apiRoute        = require("./routes/api");
+    userRoute       = require("./routes/user/account")
 
 
 app.use(bodyParser.urlencoded({extended: true})); //params and form data collector
 app.set("view engine", "pug"); //defaults .pug for view engine extensions
 app.use(express.static(__dirname + "/public")); //makes the directory available to the client side
 app.use(express.static(__dirname + "/views"));
-app.use(methodOverride("_method")); //helps with the RESTful routing
+app.use(methodOverride("_method")); //helps with the RESTful routing methods
 
 /* passport config */
 app.use(require("express-session")({
@@ -38,7 +39,7 @@ app.use(back()); //keeps track of the previous link
 app.use(flash()); //handles the flash messages
 
 /* makes currentUser available to all routes */
-app.use(function(req, res, next){
+app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.warning     = req.flash('warning');
     res.locals.success     = req.flash('success');
@@ -51,6 +52,7 @@ app.use(authRoute);
 app.use('/blogs', blogsRoute);
 app.use('/blogs', commentsRoute);
 app.use('/api', apiRoute);
+app.use('/user/', userRoute);
 
 app.get('/404', (req, res) => {
     res.render('404', {pretty: true, warning: req.flash('warning')});
