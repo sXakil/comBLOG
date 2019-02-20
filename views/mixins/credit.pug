@@ -1,20 +1,33 @@
 mixin abAuthor
-    -let user = blog.author
+    -let author = blog.credit
     .well.well-sm
         .row
             .col-sm-8.col-md-2
-                img(src="http://placehold.it/150x150" alt="").img-circle.img-responsive
+                img(src="http://placehold.it/150x150" alt="").img-circle.img-responsive#credit-img
             .col-sm-6.col-md-8
-                h4= user.firstName + ' ' + user.surName
+                h4= author.firstName + ' ' + author.surName
+                p= author.bio + "Tri-tip flank tongue ribeye. Buffalo kevin prosciutto beef, swine pastrami boudin. Shoulder burgdoggen turducken leberkas, tri-tip chicken brisket bresaola doner cupim pancetta filet mignon beef ribs pork belly. Bresaola chuck tri-tip ham. Prosciutto short loin sausage beef ribs shoulder."
+                i.glyphicon.glyphicon-map-marker
                 small
-                    cite(title="San Francisco, USA") San Francisco, USA 
-                        i.glyphicon.glyphicon-map-marker
+                    cite(title=author.location)= author.location
                 p
-                    i.glyphicon.glyphicon-envelope
-                    |  email@example.com
-                    br
                     i.glyphicon.glyphicon-globe
-                    a(href="http://www.example.com")  example.com
+                    a(href=author.website)= ' ' + author.website.replace('http://', '').replace('https://', '')
                     br
-                    i.glyphicon.glyphicon-gift
-                    |  June 02, 1988
+                    table
+                        tr
+                            td(style="padding: 5px")
+                                a(href=author.socialLinks.facebook)
+                                    i.fa.fa-facebook
+                            td(style="padding: 5px")
+                                a(href=author.socialLinks.twitter)
+                                    i.fa.fa-twitter
+                            td(style="padding: 5px")
+                                a(href=author.socialLinks.linkedin)
+                                    i.fa.fa-linkedin
+                            td(style="padding: 5px")
+                                a(href=author.socialLinks.github)
+                                    i.fa.fa-github
+                    br
+                    | Member since 
+                    = author.registrationDate.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'})
