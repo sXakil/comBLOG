@@ -15,12 +15,7 @@ html
                         img.img-responsive(src=blog.image style="max-height: 60vh; width: 100%")
                         .caption-full
                             .pull-right 
-                                -var arr = blog.created.toISOString().split("-");
-                                -var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-                                h5= months[parseInt(arr[1],10)] + " " + parseInt(arr[1]) + ", " + arr[0]
-                            //- h5
-                            //-     p(style="color: grey; font-size: 16px") Posted by  
-                            //-         a(href="/user/" + blog.author.username)= blog.author.username
+                                h5= blog.created.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'}) 
                     .blog-heading
                         p(style="color: lightslategrey; padding: 20")= blog.title
                     div(style="text-align: left; padding-bottom: 10px;")
@@ -50,26 +45,26 @@ html
                                 |  to comment
                     if(blog.comments.length)
                         h2.page-header Comments
-                        section.comment-list#list
+                    section.comment-list#list
                         -var i = 0
-                            for comment in blog.comments
-                                article.row
-                                    .col-md-2.col-sm-2.hidden-xs
-                                        .thumbnail
-                                            img.img-responsive(src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-circle-512.png")
-                                            figcaption(style="text-align: center")= comment.author.username
-                                    .col-md-10.col-sm-10
-                                        .panel.panel-default.arrow.left
-                                            .panel-body
-                                                .comment-post
-                                                    p= comment.text
-                                        if(currentUser && comment.author.id.equals(currentUser._id))
-                                            a(href="/blogs/" + blog._id + "/comment/" + comment._id + "/edit")
-                                                button.btn.btn-xs.btn-success 
-                                                    i.fas.fa-edit
-                                            form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    
-                                                button.btn.btn-xs.btn-danger
-                                                    i.fas.fa-trash-alt
-                                -i++
-                                if(i !== blog.comments.length) 
-                                    hr
+                        for comment in blog.comments
+                            article.row
+                                .col-md-2.col-sm-2.hidden-xs
+                                    .thumbnail
+                                        img.img-responsive(src="https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-circle-512.png")
+                                        figcaption(style="text-align: center")= comment.author.username
+                                .col-md-10.col-sm-10
+                                    .panel.panel-default.arrow.left
+                                        .panel-body
+                                            .comment-post
+                                                p= comment.text
+                                    if(currentUser && comment.author.id.equals(currentUser._id))
+                                        a(href="/blogs/" + blog._id + "/comment/" + comment._id + "/edit")
+                                            button.btn.btn-xs.btn-success 
+                                                i.fas.fa-edit
+                                        form(action="/blogs/" + blog._id + "/comment/" + comment._id + "?_method=DELETE" method="POST" style="display: inline")    
+                                            button.btn.btn-xs.btn-danger
+                                                i.fas.fa-trash-alt
+                            -i++
+                            if(i !== blog.comments.length) 
+                                hr
