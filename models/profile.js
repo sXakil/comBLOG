@@ -12,6 +12,27 @@ const profileSchema = new mongoose.Schema({
         type: String,
         default: "http://placehold.it/150x150"
     },
+    bio: {
+        type: String,
+        default: null
+    },
+    website: {
+        type: String,
+        default: 'http://example.com'
+    },
+    location: {
+        type: String,
+        default: 'N/A'
+    },
+    socialLinks: {
+        type: Object,
+        default: {
+            facebook: '#',
+            twitter: '#',
+            linkedin: '#',
+            github: '#'
+        }
+    },
     registrationDate: {
         type: Date,
         default: Date.now

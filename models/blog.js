@@ -12,6 +12,10 @@ const blogSchema = new mongoose.Schema({
         },
         username: String
     },
+    credit: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Profile"
+    },
     created: {
         type: Date,
         default: Date.now
