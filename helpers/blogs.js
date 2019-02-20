@@ -14,10 +14,12 @@ exports.showSelectedBlog = (req, res) => {
     db.Blog.findById(req.params.id)
     .populate("comments")
     .exec((err, blog) => {
-        if(err) res.redirect("/404")
-        if(!blog) res.render("404")
+        console.log(blog.author)
+        if(err) res.send(err)
+        else if(!blog) res.send(blog)
         else {
             req.session.returnTo = '/blogs/' + blog._id;
+            console.log(blog.author)
             res.render("blogs/show", {blog : blog, pretty: true})
         }
     })

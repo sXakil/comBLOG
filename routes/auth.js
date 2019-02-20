@@ -17,15 +17,23 @@ router.get("/register", middleware.isAlreadyLoggedIn, (req, res) => {
 /* registration request */
 router.post("/register", (req, res) => {
     var newUser = new db.User({
+        username: req.body.username
+    });
+    var userProfile = {
         username: req.body.username,
         firstName: req.body.firstName,
-        surName: req.body.surName
-    });
-    db.User.register(newUser, req.body.password, (err, user) => {
+        surName: req.body.surName,
+        gender: req.body.gender,
+        bday: req.body.bday,
+        email: req.body.email,
+        phone: req.body.phoneCC + req.body.phone,
+        image: req.body.image
+    }
+    db.User.register(newUser, req.body.password, (err) => {
         if(err){
             if(err.errors) {
-                var errs = [];
-                for(var e in err.errors) {
+                let errs = [];
+                for(let e in err.errors) {
                     errs.push(err.errors[e].message)
                 }
                 req.flash("error", errs)
@@ -35,8 +43,11 @@ router.post("/register", (req, res) => {
             }
             res.redirect("/register");
         } else {
-            passport.authenticate("local")(req, res, () => {
-                res.redirect("/blogs");
+            db.Profile.create(userProfile, err => {
+                if(err) res.send(err)
+                passport.authenticate("local")(req, res, () => {
+                    res.redirect("/blogs");
+                })
             })
         }
     })

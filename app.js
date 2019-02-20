@@ -7,14 +7,14 @@ const express        = require("express"),
     methodOverride   = require("method-override"),
     db               = require("./models"),
     flash            = require("connect-flash"),
-    back             = require('express-back');
+    back             = require('express-back')
 
 /* requiring the routes */
 let blogsRoute      = require("./routes/blogs"),
     commentsRoute   = require("./routes/comments"),
     authRoute       = require("./routes/auth"),
-    apiRoute        = require("./routes/api");
-    userRoute       = require("./routes/user/account")
+    apiRoute        = require("./routes/api"),
+    userRoute       = require("./routes/user/profile")
 
 
 app.use(bodyParser.urlencoded({extended: true})); //params and form data collector
@@ -29,11 +29,11 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(db.User.authenticate()));
-passport.serializeUser(db.User.serializeUser());
-passport.deserializeUser(db.User.deserializeUser());
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(db.User.authenticate()))
+passport.serializeUser(db.User.serializeUser())
+passport.deserializeUser(db.User.deserializeUser())
 
 app.use(back()); //keeps track of the previous link
 app.use(flash()); //handles the flash messages
@@ -41,29 +41,29 @@ app.use(flash()); //handles the flash messages
 /* makes currentUser available to all routes */
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
-    res.locals.warning     = req.flash('warning');
-    res.locals.success     = req.flash('success');
-    res.locals.error       = req.flash('error');
+    res.locals.warning     = req.flash('warning')
+    res.locals.success     = req.flash('success')
+    res.locals.error       = req.flash('error')
     next();
-});
+})
 
 /* use the routes */
-app.use(authRoute);
-app.use('/blogs', blogsRoute);
-app.use('/blogs', commentsRoute);
-app.use('/api', apiRoute);
-app.use('/user/', userRoute);
+app.use(authRoute)
+app.use('/blogs', blogsRoute)
+app.use('/blogs', commentsRoute)
+app.use('/api', apiRoute)
+app.use('/user', userRoute)
 
 app.get('/404', (req, res) => {
-    res.render('404', {pretty: true, warning: req.flash('warning')});
-});
+    res.render('404', {pretty: true, warning: req.flash('warning')})
+})
 
 app.get('/*', (req, res) => {
     req.flash('warning', "Error 404! Page not found")
     res.redirect('/404')
-});
+})
 
 /* starts the server */
 app.listen(3000, 'localhost', function(){
-    console.log("Server launched!");
-});
+    console.log("Server launched!")
+})

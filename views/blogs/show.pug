@@ -1,8 +1,9 @@
 include ../partials/header
+include ../mixins/credit
 doctype html
 html
     head
-        +head
+        +head(blog.title)
         script(src="/js/post-comment.js")
     body
         +menu
@@ -17,9 +18,9 @@ html
                                 -var arr = blog.created.toISOString().split("-");
                                 -var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
                                 h5= months[parseInt(arr[1],10)] + " " + parseInt(arr[1]) + ", " + arr[0]
-                            h5
-                                p(style="color: grey; font-size: 16px") Posted by  
-                                    a(href="/user/" + blog.author.username)= blog.author.username
+                            //- h5
+                            //-     p(style="color: grey; font-size: 16px") Posted by  
+                            //-         a(href="/user/" + blog.author.username)= blog.author.username
                     .blog-heading
                         p(style="color: lightslategrey; padding: 20")= blog.title
                     div(style="text-align: left; padding-bottom: 10px;")
@@ -34,6 +35,7 @@ html
                                     |  Delete
                     -var body = blog.blog.replace(/(?:\r\n|\r|\n)/g, '<br/>')
                     p.blog-body !{body}
+                    +abAuthor
                     .well
                         if(currentUser)
                             .form-group

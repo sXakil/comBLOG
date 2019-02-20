@@ -6,5 +6,6 @@ mongoose.set('useFindAndModify', false);
 module.exports = {
     Blog : require("./blog"),
     Comment : require("./comment"),
-    User : require("./user")
+    User : require("./user"),
+    Profile : require("./profile")
 }
