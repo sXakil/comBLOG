@@ -1,0 +1,20 @@
+mixin abAuthor
+    -let user = blog.author
+    .well.well-sm
+        .row
+            .col-sm-8.col-md-2
+                img(src="http://placehold.it/150x150" alt="").img-circle.img-responsive
+            .col-sm-6.col-md-8
+                h4= user.firstName + ' ' + user.surName
+                small
+                    cite(title="San Francisco, USA") San Francisco, USA 
+                        i.glyphicon.glyphicon-map-marker
+                p
+                    i.glyphicon.glyphicon-envelope
+                    |  email@example.com
+                    br
+                    i.glyphicon.glyphicon-globe
+                    a(href="http://www.example.com")  example.com
+                    br
+                    i.glyphicon.glyphicon-gift
+                    |  June 02, 1988

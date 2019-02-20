@@ -1,28 +1,118 @@
-include ../partials/header
 doctype html
 html
     head
-        +head
+        script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', rel='stylesheet')
+        script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+        script(src="/js/validate.js")
+        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.8/css/all.css')
     body
-        +menu
+        style.
+            .divider-text {
+                position: relative;
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+            .divider-text span {
+                padding: 7px;
+                font-size: 12px;
+                position: relative;   
+                z-index: 2;
+            }
+            .divider-text:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+                top: 55%;
+                left: 0;
+                z-index: 1;
+            }
         .container
-            .row
-                +flashMessage
-                .jumbotron
-                    h1(style="text-align: center") Sign Up to blog
-                        span(style="font-weight: 900") COM
-                    div(style="width: 40%; margin: 30px auto;")
-                        form(action="/register" method="POST" style="text-align: center")
-                            .form-group
-                                input.form-control(type="text" name="username" placeholder="Username")
-                            .form-group
-                                input.form-control.input-lg(type="text" name="firstName" placeholder="First Name")
-                            .form-group
-                                input.form-control.input-lg(type="text" name="surName" placeholder="Surname")
-                            .form-group
-                                input.form-control(type="password" name="password" placeholder="Password")
-                            .form-group
-                                button.btn.btn-lg.btn-primary Sign Up
-                        a(href="/blogs")
-                            i.fas.fa-arrow-left
-                            |  Go Back
+            br
+            .alert.alert-danger#alert(style="display: none") Password didn't match
+            if(error)
+                for e in error
+                    .alert.alert-danger.flashMessage= e
+            if(warning)
+                for w in warning
+                    .alert.alert-warning.flashMessage= w
+            if(success)
+                for s in success
+                    .alert.alert-success.flashMessage= s
+            .card.bg-light
+                article.card-body.mx-auto(style='max-width: 400px;')
+                    h4.card-title.mt-3.text-center 
+                    p.text-center Get started with your free account
+                    p.divider-text
+                        span.bg-light Create Account
+                    form(name="register" action="/register" onsubmit="return validateForm()" method="POST")
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-user
+                            input.form-control(name='firstName' placeholder='Firstname' type='text' required)
+                            span(style="padding: 5px")
+                            input.form-control(name='surName' placeholder='Surname' type='text' required)
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-envelope
+                            input.form-control(name='email' placeholder='Email address' type='email' required)
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-user-circle
+                            input.form-control(name='username' placeholder='Username' type='text' required)
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-phone
+                            select.custom-select(name="phoneCC" style='max-width: 120px;')
+                                option(selected='' value='+880') +880
+                                option(value='+972') +972
+                                option(value='+198') +198
+                                option(value='+701') +701
+                            input.form-control(name='phone' placeholder='Phone number' type='text')
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-male
+                                    i.fa.fa-female
+                            select.form-control(name='gender')
+                                option(selected='' value='Undefined')  Select Gender
+                                option(value='Male') Male
+                                option(value='Female') Female
+                                option(value='Undefined') Undefined
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-birthday-cake
+                            input.form-control(name="bday" type="date")
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-lock
+                            input.form-control(name='password' placeholder='Create password' type='password' required)
+                        .form-group.input-group
+                            .input-group-prepend
+                                span.input-group-text
+                                    i.fa.fa-lock
+                            input.form-control(name='confPassword' placeholder='Repeat password' type='password' required)
+                        .form-group
+                            .form-check
+                                input.form-check-input#termsCheck(type="checkbox" required)
+                                label.form-check-label(for="termsCheck")
+                                    small By clicking Submit, you agree to our 
+                                        a(href="#") Terms & Conditions
+                                        |, 
+                                        a(href="#") Visitor Agreement
+                                        |  and 
+                                        a(href="#") Privacy Policy
+                                        |.
+                        .form-group
+                            button.btn.btn-primary.btn-block(type='submit')  Create Account  
+                        p.text-center
+                            | Have an account? 
+                            a(href='/login') Log In

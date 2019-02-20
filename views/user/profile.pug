@@ -1,0 +1,16 @@
+include ../partials/header
+doctype html
+html(lang="en")
+    head
+        +head(user.firstName + ' ::: Profile')
+    body
+        +menu
+        ul(type='none')
+            li
+                img(src=user.image)
+            li= 'Name: ' + user.firstName + ' ' + user.surName
+            li= 'Gender: ' + user.gender
+            li= 'Email: ' + user.email
+            li= 'Phone: ' + user.phone
+            li= 'Birthday: ' + user.bday
+            li= 'Joined: ' + user.registrationDate
