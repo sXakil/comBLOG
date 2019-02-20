@@ -5,6 +5,7 @@ exports.postComment = (req, res) => {
         if(err) res.send(err)
         if(!blog) res.render("404")
         else {
+            req.body.comment.text = req.sanitize(req.body.comment.text)
             db.Comment.create(req.body.comment, (err, comment) => {
                 if(err) {
                     console.log(err)
@@ -41,6 +42,7 @@ exports.updateComment = (req, res) => {
     db.Blog.findById(req.params.id, (err, blog) => {
         if(err) res.send(err)
         else {
+            req.body.text = req.sanitize(req.body.text)
             db.Comment.findByIdAndUpdate(req.params.comId, {text : req.body.text}, (err) => {
                 if(err) {
                     res.send(err)

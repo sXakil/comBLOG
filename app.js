@@ -7,7 +7,8 @@ const express        = require("express"),
     methodOverride   = require("method-override"),
     db               = require("./models"),
     flash            = require("connect-flash"),
-    back             = require('express-back')
+    back             = require("express-back"),
+    sanitizer        = require("express-sanitizer")
 
 /* requiring the routes */
 let blogsRoute      = require("./routes/blogs"),
@@ -22,6 +23,7 @@ app.set("view engine", "pug"); //defaults .pug for view engine extensions
 app.use(express.static(__dirname + "/public")); //makes the directory available to the client side
 app.use(express.static(__dirname + "/views"));
 app.use(methodOverride("_method")); //helps with the RESTful routing methods
+app.use(sanitizer());
 
 /* passport config */
 app.use(require("express-session")({
